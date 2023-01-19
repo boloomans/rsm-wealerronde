@@ -28,6 +28,12 @@ module.exports = {
         10: '#EDF8EC',
         900: '#50B847',
       },
+      black: {
+        900: 'black',
+      },
+      white: {
+        900: 'white',
+      },
     },
     extend: {
       container: {

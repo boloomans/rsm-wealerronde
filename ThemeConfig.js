@@ -20,18 +20,14 @@ export const darkTheme = {
 export const Button = styled.button`
   /* Adapt the colors based on primary prop */
   background: ${props => props.primary ? "white" : "primary"};
-  color: ${props => props.primary ? "primary" : "palevioletred"};
+  color: ${props => props.primary ? "primary" : "white"};
 
   font-size: 1em;
-  margin: 1em;
-  padding: 0.25em 1em;
-  border: 2px solid palevioletred;
-  border-radius: 3px;
-  background: url(/public/favicon.ico);
-  background-repeat: no-repeat;
-  background-size: 6px 10px;
-  background-position: center right 30px;
-  height: 100px;
+  border-radius: 50%;
+  height: 50px;
+  width: 50px;
+ 
+ 
 `;
 
 export const GlobalStyles = createGlobalStyle`

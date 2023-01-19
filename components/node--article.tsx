@@ -4,6 +4,7 @@ import { formatDate } from 'lib/format-date';
 import { MediaImage } from 'components/media--image';
 import { FormattedText } from 'components/formatted-text';
 import { Button } from '../ThemeConfig';
+import { BiChevronRight } from 'react-icons/bi';
 
 
 export function NodeArticle({ node, ...props }) {
@@ -57,7 +58,7 @@ export function NodeArticle({ node, ...props }) {
 export function NodeArticleTeaser({ node, ...props }) {
     console.log(node);
   return (
-    <article className="flex flex-col space-y-4 bg-secondary-10" {...props}>
+    <article className="flex flex-col space-y-4 bg-secondary-10 rounded-lg" {...props}>
       {node.field_article_image && (
         <Link href={node.path.alias} passHref>
           <a className="block overflow-hidden no-underline rounded-t-lg">
@@ -77,14 +78,14 @@ export function NodeArticleTeaser({ node, ...props }) {
           </a>
         </Link>
         {node.body?.summary && (
-          <p className="text-sm break-keep" data-cy="summary">
+          <p className="text-sm break-keep text-black-900" data-cy="summary">
             {node.body.summary}
           </p>
         )}
       </div>
         <div>
-            <Button className="bg-secondary-900 rounded-full bg-[url('/public/arrow-right.svg')]">
-                Button
+            <Button className="bg-secondary-900 rounded-full">
+                <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
             </Button>
         </div>
     </article>
