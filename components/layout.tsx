@@ -6,8 +6,9 @@ import { DrupalMenuLinkContent } from 'next-drupal';
 import { PreviewAlert } from 'components/preview-alert';
 import { MenuMain } from 'components/menu--main';
 import { MenuFooter } from 'components/menu--footer';
-import DarkModeToggle from "./DarkModeToggle";
 import React from "react";
+import {FaBell} from "react-icons/fa";
+import {BlockHero} from "./block--hero";
 
 export interface LayoutProps {
   title?: string;
@@ -22,25 +23,27 @@ export function Layout({ title, menus, children }: LayoutProps) {
   return (
     <>
       <Head>
-        <title>{title} - Acquia CMS</title>
+        <title>{title} - RSM Wealerronde</title>
       </Head>
       <PreviewAlert />
       <div className="flex flex-col min-h-screen">
         <header className="border-b">
-          <div className="container flex flex-col items-center justify-between px-6 py-4 mx-auto md:flex-row">
+          <div className="container flex flex-row items-center justify-between px-6 py-4 mx-auto">
             <Link href="/" passHref>
-              <a className="flex items-center mb-4 space-x-2 no-underline md:mb-0">
-                <div className="w-8 h-10">
-                  <Image src="/logo.png" alt="Logo" width={76} height={90} />
+              <a className="flex items-center space-x-2 no-underline">
+                <div className="">
+                  <Image src="/logo.png" alt="Logo" width={83} height={33} />
                 </div>
-                <span className="text-lg font-semibold">Acquia CMS</span>
               </a>
             </Link>
+            <FaBell className="text-primary-900 text-2xl"></FaBell>
             {menus?.main && <MenuMain menu={menus.main} />}
-            <DarkModeToggle></DarkModeToggle>
           </div>
         </header>
-        <main className="flex-1">{children}</main>
+        <main className="flex-1">
+          <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
+          {children}
+        </main>
         <footer className="container px-6 mx-auto">
           <div className="pt-8 pb-12 border-t md:pt-12">
             {menus?.footer && <MenuFooter menu={menus.footer} />}

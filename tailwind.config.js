@@ -43,6 +43,9 @@ module.exports = {
           lg: '940px',
         },
       },
+      objectPosition: {
+        'custom': '0 -240px',
+      }
     },
   },
   variants: {
