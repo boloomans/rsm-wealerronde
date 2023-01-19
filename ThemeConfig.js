@@ -19,7 +19,7 @@ export const darkTheme = {
 
 export const Button = styled.button`
   /* Adapt the colors based on primary prop */
-  background: ${props => props.primary ? "primary" : "white"};
+  background: ${props => props.primary ? "white" : "primary"};
   color: ${props => props.primary ? "primary" : "palevioletred"};
 
   font-size: 1em;

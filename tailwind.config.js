@@ -7,9 +7,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ['Inter', 'system-ui', 'sans-serif'],
-      body: ['Inter', 'PT-Sans', 'sans-serif'],
-      title: ['Inter', 'system-ui', 'sans-serif'],
+      display: ['PT Sans', 'sans-serif'],
+      body: ['PT Sans', 'sans-serif'],
+      title: ['PT Serif','serif'],
     },
     colors: {
       primary: {

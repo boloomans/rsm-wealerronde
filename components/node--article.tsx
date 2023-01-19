@@ -57,10 +57,10 @@ export function NodeArticle({ node, ...props }) {
 export function NodeArticleTeaser({ node, ...props }) {
     console.log(node);
   return (
-    <article className="flex flex-col space-y-4" {...props}>
+    <article className="flex flex-col space-y-4 bg-secondary-10" {...props}>
       {node.field_article_image && (
         <Link href={node.path.alias} passHref>
-          <a className="block overflow-hidden no-underline rounded-md">
+          <a className="block overflow-hidden no-underline rounded-t-lg">
             <MediaImage
               media={node.field_article_image}
               priority
@@ -70,22 +70,22 @@ export function NodeArticleTeaser({ node, ...props }) {
 
         </Link>
       )}
-      <div>
+      <div className="m-10">
         <Link href={node.path.alias} passHref>
-          <a className="no-underline text-primary-900 hover:text-blue-600">
-            <h2 className="mb-4 text-xl font-bold">{node.title}</h2>
+          <a className="no-underline text-secondary-900">
+            <h2 className="mb-4 text-lg font-bold">{node.title}</h2>
           </a>
         </Link>
         {node.body?.summary && (
-          <p className="text-gray-500" data-cy="summary">
+          <p className="text-sm break-keep" data-cy="summary">
             {node.body.summary}
           </p>
         )}
       </div>
         <div>
-            <button className="rounded-full bg-[url('/public/favicon.ico')]">
+            <Button className="bg-secondary-900 rounded-full bg-[url('/public/arrow-right.svg')]">
                 Button
-            </button>
+            </Button>
         </div>
     </article>
   );
