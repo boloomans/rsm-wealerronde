@@ -30,6 +30,8 @@ export const Button = styled.button`
  
 `;
 
+
+
 export const GlobalStyles = createGlobalStyle`
   body {
     background: ${({ theme }) => theme.body};
@@ -38,3 +40,4 @@ export const GlobalStyles = createGlobalStyle`
     // transition: all 0.50s linear;
   }
 `
+

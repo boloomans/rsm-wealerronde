@@ -5,7 +5,7 @@ import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 import { getMenus } from 'lib/get-menus';
 import { Layout, LayoutProps } from 'components/layout';
 import { PageHeader } from 'components/page-header';
-import { NodeArticleTeaser } from 'components/node--article';
+import { NodeCardSmall } from 'components/node--card';
 import { drupal } from '../lib/drupal';
 
 interface ArticlesPageProps extends LayoutProps {
@@ -18,9 +18,9 @@ export default function ArticlePage({ menus, articles }: ArticlesPageProps) {
       <PageHeader heading="Articles" text="List of latest articles." />
       <div className="container px-6 pb-10 mx-auto">
         {articles?.length ? (
-          <div className="grid gap-14 md:grid-cols-2">
+          <div className="grid gap-x-2 gap-y-12 md:gap-x-4 grid-cols-2">
             {articles.map((article) => (
-              <NodeArticleTeaser key={article.id} node={article} />
+              <NodeCardSmall key={article.id} node={article} />
             ))}
           </div>
         ) : (

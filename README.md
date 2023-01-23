@@ -67,7 +67,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the headless site.
 │   ├── media--image.tsx
 │   ├── menu--footer.tsx
 │   ├── menu--main.tsx
-│   ├── node--article.tsx
+│   ├── node--card.tsx
 │   └── node--page.tsx
 ├── lib
 │   └── format-date.ts
@@ -189,7 +189,7 @@ export default function NodePage({ node, menus }: NodePageProps) {
   return (
     <Layout title={node.title} menus={menus}>
       {node.type === "node--page" && <NodeBasicPage node={node} />}
-      {node.type === "node--article" && <NodeArticle node={node} />}
+      {node.type === "node--article" && <NodeCard node={node} />}
       {node.type === "node--event" && <NodeEvent node={node} />}
       {node.type === "node--person" && <NodePerson node={node} />}
       {node.type === "node--place" && <NodePlace node={node} />}

@@ -7,7 +7,7 @@ import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 
 import { getMenus } from '../lib/get-menus';
 import { Layout, LayoutProps } from '../components/layout';
-import { NodeArticle } from '../components/node--article';
+import { NodeCard } from '../components/node--card';
 import { NodeEvent } from '../components/node--event';
 import { NodePerson } from '../components/node--person';
 import { NodePlace } from '../components/node--place';
@@ -52,7 +52,7 @@ export default function EntityPage({
         <NodeBasicPage node={entity as DrupalNode} />
       )}
       {entity.type === 'node--article' && (
-        <NodeArticle node={entity as DrupalNode} />
+        <NodeCard node={entity as DrupalNode} />
       )}
       {entity.type === 'node--event' && (
         <NodeEvent node={entity as DrupalNode} />
