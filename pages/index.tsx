@@ -4,7 +4,7 @@ import { getMenus } from 'lib/get-menus';
 import {DrupalBlock, DrupalNode} from 'next-drupal';
 import { NodeEventTeaser } from '../components/node--event';
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 import Link from 'next/link';
 import { drupal } from '../lib/drupal';
 import { testApiCompatibility } from 'next-acms';
