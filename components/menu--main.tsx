@@ -32,14 +32,8 @@ export function MenuMain({ menu, className, ...props }: MenuMainProps) {
                 'menu-item--active-trail': isActive,
               })}
             >
-              <Link href={item.url} passHref>
-                <a
-                  className={classNames('hover:text-blue-600', {
-                    'text-blue-600': isActive,
-                  })}
-                >
-                  {item.title}
-                </a>
+              <Link className={classNames('hover:text-blue-600', {'text-blue-600': isActive,})} href={item.url} passHref>
+                {item.title}
               </Link>
             </li>
           );

@@ -69,10 +69,8 @@ export function NodeArticleTeaser({ node, ...props }) {
         </Link>
       )}
       <div className="m-10">
-        <Link href={node.path.alias} passHref>
-          <a className="no-underline text-secondary-900">
+        <Link className="no-underline text-secondary-900" href={node.path.alias} passHref>
             <h2 className="mb-4 text-lg font-bold">{node.title}</h2>
-          </a>
         </Link>
         {node.body?.summary && (
           <p className="text-sm break-keep text-black-900" data-cy="summary">

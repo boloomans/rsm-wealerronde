@@ -30,12 +30,10 @@ export function Layout({ title, menus, banners, children }: LayoutProps) {
       <div className="flex flex-col relative" >
         <header className={`w-full z-50 navbar sticky-custom`}>
           <div className="container flex flex-row items-center justify-between px-6 py-4 mx-auto">
-            <Link href="/" passHref>
-              <a className="flex items-center space-x-2 no-underline">
-                <div className="">
-                  <Image src="/logo.png" alt="Logo" width={83} height={33} />
-                </div>
-              </a>
+            <Link className="flex items-center space-x-2 no-underline" href="/" passHref>
+              <div className="">
+                <Image src="/logo.png" alt="Logo" width={83} height={33} />
+              </div>
             </Link>
             <FaBell className="text-primary-900 text-2xl"></FaBell>
             {menus?.main && <MenuMain menu={menus.main} />}

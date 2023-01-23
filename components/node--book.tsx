@@ -41,10 +41,8 @@ export function NodeBookTeaser({ node }) {
   return (
     <article className="grid max-w-xl grid-cols-3 gap-10 py-4">
       {node.field_book_image && (
-        <Link href={node.path.alias} passHref>
-          <a className="block overflow-hidden no-underline rounded-md">
-            <MediaImage media={node.field_book_image} priority />
-          </a>
+        <Link className="block overflow-hidden no-underline rounded-md" href={node.path.alias} passHref>
+          <MediaImage media={node.field_book_image} priority />
         </Link>
       )}
       <div className="col-span-2">
@@ -57,10 +55,8 @@ export function NodeBookTeaser({ node }) {
             </span>
           ) : null}
         </p>
-        <Link href={node.path.alias} passHref>
-          <a className="no-underline hover:text-blue-600">
+        <Link className="no-underline hover:text-blue-600" href={node.path.alias} passHref>
             <h2 className="mb-4 text-xl font-bold">{node.title}</h2>
-          </a>
         </Link>
         {node.body && (
           <div
