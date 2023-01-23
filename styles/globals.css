@@ -7,3 +7,82 @@
 .shieldMask {
     clip-path: url(#mask);
 }
+:root {
+    --iv-bold: 700;
+    --iv-display: 'PT Sans', 'sans-serif';
+    --iv-white: #FFF;
+    --iv-primary: #D6B46A;
+    --iv-secondary: #D6B46A;
+}
+
+.sticky-custom {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    transition: all 0.5s ease;
+    animation: smoothScroll 1s forwards;
+}
+
+@keyframes smoothScroll {
+    0% {
+        transform: translateY(-71px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.react-tabs {
+    -webkit-tap-highlight-color: transparent;
+}
+
+.react-tabs__tab-list {
+    margin: 0 0 10px;
+    padding: 0;
+}
+
+.react-tabs__tab {
+    display: inline-block;
+    position: relative;
+    list-style: none;
+    padding: 6px 12px;
+    cursor: pointer;
+    background: transparent;
+    color: var(--iv-secondary);
+    font-family: var(--iv-display);
+    font-weight: var(--iv-bold);
+}
+
+.react-tabs__tab--selected {
+    background: var(--iv-secondary);
+    color: var(--iv-white);
+    border-radius: 5px;
+}
+
+.react-tabs__tab--disabled {
+    color: GrayText;
+    cursor: default;
+}
+
+.react-tabs__tab:focus {
+    outline: none;
+}
+
+.react-tabs__tab:focus:after {
+    content: '';
+    position: absolute;
+    height: 5px;
+    left: -4px;
+    right: -4px;
+    bottom: -5px;
+    background: #fff;
+}
+
+.react-tabs__tab-panel {
+    display: none;
+}
+
+.react-tabs__tab-panel--selected {
+    display: block;
+}

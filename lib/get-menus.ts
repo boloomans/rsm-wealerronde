@@ -1,5 +1,5 @@
 import { DrupalMenuLinkContent } from 'next-drupal';
-import { drupal } from '../lib/drupal';
+import { drupal } from './drupal';
 import { JsonApiWithLocaleOptions } from 'next-drupal/dist/types';
 import { GetStaticPropsContext } from 'next';
 
