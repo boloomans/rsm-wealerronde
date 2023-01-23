@@ -4,13 +4,21 @@ import "styles/globals.css"
 import {useEffect, useState} from "react";
 import {ThemeProvider} from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "../ThemeConfig";
-import useDarkMode from "use-dark-mode";
+// import useDarkMode from "use-dark-mode";
+import { PT_Sans } from '@next/font/google'
+
+const pt_sans = PT_Sans({
+  weight: ['400', '700'],
+  style: ['normal', 'italic'],
+  subsets: ['latin'],
+})
 
 export default function App({ Component, pageProps }: AppProps) {
   const [isMounted, setIsMounted] = useState(false)
 
-  const darkmode = useDarkMode()
-  const theme = darkmode.value ? darkTheme : lightTheme
+  // const darkmode = useDarkMode()
+  const theme = lightTheme
+  // const theme = darkmode.value ? darkTheme : lightTheme
 
   useEffect(() => {
     setIsMounted(true)

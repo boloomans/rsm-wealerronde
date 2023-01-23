@@ -83,11 +83,13 @@ export function NodeArticleTeaser({ node, ...props }) {
           </p>
         )}
       </div>
-        <div>
-            <Button className="bg-secondary-900 rounded-full">
-                <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
-            </Button>
-        </div>
+      <div>
+        <Link href={node.path.alias} passHref>
+          <Button className="bg-secondary-900 rounded-full" as="a">
+              <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
+          </Button>
+        </Link>
+      </div>
     </article>
   );
 }
