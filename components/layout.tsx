@@ -17,7 +17,7 @@ export interface LayoutProps {
     main: DrupalMenuLinkContent[];
     footer: DrupalMenuLinkContent[];
   };
-  banners,
+  banners?,
 }
 
 export function Layout({ title, menus, banners, children }: LayoutProps) {

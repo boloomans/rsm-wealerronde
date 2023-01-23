@@ -162,13 +162,13 @@ export default function WebformPage2({ tags, menus }: WebformPageProps) {
           </div>
           <p>
             <Link href="/" passHref>
-              <a>Go back</a>
+              Go back
             </Link>
           </p>
         </article>
       </div>
     </Layout>
-  )
+  );
 }
 
 export async function getStaticProps(

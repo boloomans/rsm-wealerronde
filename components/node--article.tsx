@@ -60,15 +60,12 @@ export function NodeArticleTeaser({ node, ...props }) {
   return (
     <article className="flex flex-col space-y-4 bg-secondary-10 rounded-lg" {...props}>
       {node.field_article_image && (
-        <Link href={node.path.alias} passHref>
-          <a className="block overflow-hidden no-underline rounded-t-lg">
+        <Link className="block overflow-hidden no-underline rounded-t-lg" href={node.path.alias} passHref>
             <MediaImage
               media={node.field_article_image}
               priority
               sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
             />
-          </a>
-
         </Link>
       )}
       <div className="m-10">
