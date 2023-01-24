@@ -40,7 +40,8 @@ module.exports = {
         screens: {
           sm: '100%',
           md: '100%',
-          lg: '940px',
+          lg: '100%',
+          xl: '1140px',
         },
       },
       objectPosition: {

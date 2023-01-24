@@ -5,7 +5,7 @@ import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 import { getMenus } from 'lib/get-menus';
 import { Layout, LayoutProps } from 'components/layout';
 import { PageHeader } from 'components/page-header';
-import { NodeCardSmall } from 'components/node--card';
+import { NodeCardSmall } from 'components/node--article';
 import { drupal } from '../lib/drupal';
 
 interface ArticlesPageProps extends LayoutProps {

@@ -34,6 +34,10 @@ export default function App({ Component, pageProps }: AppProps) {
         html{
           font-family: ${ font.style.fontFamily }
         }
+        
+        .font-display {
+          font-family: ${ font.style.fontFamily }
+        }
       `}</style>
       <GlobalStyles />
       {isMounted && <Component {...pageProps} />}

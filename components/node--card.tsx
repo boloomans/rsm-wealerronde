@@ -41,9 +41,9 @@ export function NodeCard({ node, ...props }) {
 export function NodeCardSmall({ node, ...props }) {
     console.log(node);
     return (
-        <article className="grid bg-secondary-10 rounded-lg grid-cols-1 relative mt-[90px] md:m-0" {...props}>
+        <article className="grid bg-secondary-10 rounded-lg grid-cols-1 relative mt-[90px] md:mt-0 md:ml-[80px]" {...props}>
             {node.field_article_image && (
-                <Link className="block overflow-hidden object-fill absolute top-[-90px] left-1/2 translate-x-[-50%] shieldMask aspect-{95 / 122} w-3/5 md:w-2/5 md:left-[-20%] md:translate-x-[0] md:top-0 max-h-full" href={node.path.alias} passHref>
+                <Link className="block overflow-hidden object-fill absolute top-[-90px] left-1/2 translate-x-[-50%] shieldMask aspect-{95 / 122} w-3/5 md:w-2/6 md:left-[-17%] md:translate-x-[0] md:top-0 max-h-full" href={node.path.alias} passHref>
                     <svg version="1.1" id="Layer_1" width="100%" height="100%" viewBox="0 0 93.31 120">
                         <defs>
                             <clipPath id="mask" clipPathUnits="objectBoundingBox">
@@ -65,7 +65,7 @@ export function NodeCardSmall({ node, ...props }) {
                     </div>
                 </Link>
             )}
-            <div className="relative px-5 pt-14 pb-10 md:px-20 md:pt-8">
+            <div className="relative px-5 pt-14 pb-10 md:pl-32 md:pr-14 md:pt-8">
                 <Link className="no-underline text-secondary-900" href={node.path.alias} passHref>
                     <h2 className="mb-3 line-clamp-3 leading-6 md:line-clamp-none break-keep text-lg md:text-[22px] font-bold font-body">{node.title}</h2>
                 </Link>
