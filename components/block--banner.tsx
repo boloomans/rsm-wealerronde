@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, {HTMLAttributes, LinkHTMLAttributes} from 'react';
-import Image from "next/image";
+import Image from "next/legacy/image";
 import {FaRegCalendarAlt} from "react-icons/fa";
 import {Button} from "../ThemeConfig";
 import {BiChevronRight} from "react-icons/bi";
@@ -17,7 +17,7 @@ export function BlockBanner({ block, ...props }) {
         <p className="text-primary-900 font-display font-bold text-2xl lg:text-6xl">2 juni 2023</p>
       </div>
       <Link href="#" passHref>
-        <Button className="bg-primary-900 rounded-full absolute right-[5%] top-[70%]" as="a">
+        <Button className="bg-primary-900 rounded-full absolute right-[5%] top-[70%]">
           <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
         </Button>
       </Link>

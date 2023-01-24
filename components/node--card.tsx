@@ -3,17 +3,17 @@ import { MediaImage } from 'components/media--image';
 import { Button } from '../ThemeConfig';
 import { BiChevronRight } from 'react-icons/bi';
 import React from 'react';
-import Image from 'next/image';
+import Image from "next/legacy/image";
 
 
 
 export function NodeCard({ node, ...props }) {
     return (
         <article className="grid bg-secondary-10 rounded-lg md:grid-cols-2" {...props}>
-            {node.field_article_image && (
+            {node.field_news_image && (
                 <Link className="block overflow-hidden no-underline rounded-t-lg md:rounded-l-lg object-fill" href={node.path.alias} passHref>
                     <MediaImage
-                        media={node.field_article_image}
+                        media={node.field_news_image}
                         priority
                         sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
                     />
@@ -41,7 +41,7 @@ export function NodeCard({ node, ...props }) {
 export function NodeCardSmall({ node, ...props }) {
     return (
         <article className="grid bg-secondary-10 rounded-lg grid-cols-1 relative mt-[90px] md:mt-0 md:ml-[80px]" {...props}>
-            {node.field_article_image && (
+            {node.field_news_image && (
                 <Link className="block overflow-hidden object-fill absolute top-[-90px] left-1/2 translate-x-[-50%] shieldMask aspect-{95 / 122} w-3/5 md:w-2/6 md:left-[-17%] md:translate-x-[0] md:top-0 max-h-full" href={node.path.alias} passHref>
                     <svg version="1.1" id="Layer_1" width="100%" height="100%" viewBox="0 0 93.31 120">
                         <defs>
@@ -53,10 +53,17 @@ export function NodeCardSmall({ node, ...props }) {
 
 
                     <div className="absolute top-0 w-full h-full">
-                        <MediaImage className="w-full h-full"
+                        <MediaImage className="w-full h-full absolute"
                                     media={node.field_news_image}
                                     priority
-                                    sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
+                                    fill
+                                    imageStyle="coh_small_square"
+                                    imageStyling={{
+                                        objectFit: "cover"
+                                    }}
+                                    sizes="(max-width: 768px) 100vw,
+                                    (max-width: 1200px) 50vw,
+                                    420px"
                         />
                     </div>
                 </Link>
@@ -71,9 +78,11 @@ export function NodeCardSmall({ node, ...props }) {
                     </p>
                 )}
                 <div className="m-0 p-0">
-                    <Button className="bg-secondary-900 rounded-full absolute right-1/2 translate-x-[50%]  md:right-4 md:translate-x-[0%] -bottom-6 grid-cols-1">
-                        <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
-                    </Button>
+                    <Link href={node.path.alias} passHref>
+                        <Button className="bg-secondary-900 rounded-full absolute right-1/2 translate-x-[50%]  md:right-4 md:translate-x-[0%] -bottom-6 grid-cols-1">
+                            <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
+                        </Button>
+                    </Link>
                 </div>
             </div>
         </article>

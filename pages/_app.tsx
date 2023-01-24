@@ -6,6 +6,7 @@ import {ThemeProvider} from "styled-components";
 import { lightTheme, darkTheme, GlobalStyles } from "../ThemeConfig";
 // import useDarkMode from "use-dark-mode";
 import { PT_Sans } from '@next/font/google'
+import React from "react";
 
 const font = PT_Sans({
   weight: ['400', '700'],
@@ -40,7 +41,9 @@ export default function App({ Component, pageProps }: AppProps) {
         }
       `}</style>
       <GlobalStyles />
+      <React.StrictMode>
       {isMounted && <Component {...pageProps} />}
+      </React.StrictMode>
     </ThemeProvider>
   )
 }

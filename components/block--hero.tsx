@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import React, { HTMLAttributes } from 'react';
-import Image from "next/image";
+import Image from "next/legacy/image";
 import {FaRegCalendarAlt} from "react-icons/fa";
 import {Button} from "../ThemeConfig";
 import {BiChevronRight} from "react-icons/bi";
@@ -22,7 +22,7 @@ export function BlockHero({ heading, banner, className }: BlockHeroProps) {
         {banner && <BlockBanner key={undefined} block={undefined}/>}
         <BlockBanner block={undefined}></BlockBanner>
       </div>
-      <Image className="-z-10 opacity-20 object-cover lg:object-custom" src="/hero.jpg" alt="Logo" layout="fill" />
+      <Image priority className="-z-10 opacity-20 object-cover lg:object-custom" src="/hero.jpg" alt="Logo" layout="fill" />
     </div>
   );
 }

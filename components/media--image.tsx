@@ -1,27 +1,32 @@
-import Image, { ImageProps } from 'next/image';
-import { DrupalMedia } from 'next-drupal';
+import Image, {ImageProps} from 'next/image';
+import {DrupalMedia} from 'next-drupal';
 
-import { absoluteURL } from 'lib/absolute-url';
+import {absoluteURL} from 'lib/absolute-url';
+import {CSSProperties} from "react";
 
 interface MediaImageProps extends Partial<ImageProps> {
   media: DrupalMedia;
   imageStyle?: string;
+  imageStyling?: CSSProperties;
 }
 
 MediaImage.type = 'media--image';
 
 export function MediaImage({
-  media,
-  layout = 'responsive',
-  objectFit,
-  className,
-  width,
-  height,
-  priority,
-  sizes,
-  imageStyle,
-  ...props
-}: MediaImageProps) {
+                             media,
+                             imageStyle,
+                             imageStyling,
+                             fill = false,
+                             width,
+                             height,
+                             priority,
+                             quality,
+                             sizes,
+                             placeholder,
+                             blurDataURL,
+                             loading,
+                             ...props
+                           }: MediaImageProps) {
   const image = media?.image;
 
   if (!image) {
@@ -30,13 +35,12 @@ export function MediaImage({
   let sizeProps;
   let srcURL;
 
-  sizeProps =
-    layout === 'fill'
-      ? null
-      : {
-          width: width || image.resourceIdObjMeta.width,
-          height: height || image.resourceIdObjMeta.height,
-        };
+  sizeProps = fill
+    ? null
+    : {
+      width: width || image.resourceIdObjMeta.width,
+      height: height || image.resourceIdObjMeta.height,
+    };
   srcURL = absoluteURL(image.uri.url);
 
   // Use the image style to render an image if specified.
@@ -65,14 +69,17 @@ export function MediaImage({
     <div className="media__content image__wrapper" {...props}>
       <Image
         src={srcURL}
-        layout={layout}
-        objectFit={objectFit}
-        className={className}
         alt={image.resourceIdObjMeta.alt || 'Image'}
         title={image.resourceIdObjMeta.title}
         priority={priority}
         sizes={sizes}
-        {...sizeProps}
+        fill={fill}
+        quality={quality}
+        blurDataURL={blurDataURL}
+        loading={loading}
+        placeholder={placeholder}
+        style={imageStyling}
+        {...(!fill ? sizeProps : {})}
       />
     </div>
   );

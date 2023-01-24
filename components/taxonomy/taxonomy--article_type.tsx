@@ -1,5 +1,5 @@
 import { PageHeader } from '../page-header';
-import { NodeCardBig } from '../node--card';
+import { NodeCard } from '../node--card';
 import { DrupalNode, DrupalTaxonomyTerm } from 'next-drupal';
 
 export function TaxonomyArticle({
@@ -16,7 +16,7 @@ export function TaxonomyArticle({
         {additionalContent.nodes.length ? (
           <div className="grid gap-14 md:grid-cols-2">
             {additionalContent.nodes.map((node) => (
-              <NodeCardBig key={node.id} node={node} />
+              <NodeCard key={node.id} node={node} />
             ))}
           </div>
         ) : (

@@ -24,7 +24,7 @@ import {NodeBook} from "../components/node--book";
 // List of all the entity types handled by this route.
 export const ENTITY_TYPES = [
   'node--page',
-  'node--article',
+  'node--news',
   'node--event',
   'node--person',
   'node--place',
@@ -51,7 +51,7 @@ export default function EntityPage({
       {entity.type === 'node--page' && (
         <NodeBasicPage node={entity as DrupalNode} />
       )}
-      {entity.type === 'node--article' && (
+      {entity.type === 'node--news' && (
         <NodeCard node={entity as DrupalNode} />
       )}
       {entity.type === 'node--event' && (

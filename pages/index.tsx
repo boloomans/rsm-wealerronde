@@ -10,7 +10,7 @@ import { drupal } from '../lib/drupal';
 import { testApiCompatibility } from 'next-acms';
 import { ENTITY_TYPES } from './[...slug]';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {NodeCardSmall} from "../components/node--card";
+import {NodeCard, NodeCardSmall} from "../components/node--card";
 
 interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
@@ -34,13 +34,19 @@ export default function IndexPage({ menus, news, events, banners, places }: Inde
               </TabList>
 
               <TabPanel>
-                <div className="container px-6 pb-10 mx-auto mt-12">
+                <div className="container pb-10 mx-auto mt-12">
                   {news?.length ? (
-                    <div className="grid gap-14" data-cy="featured-events">
-                      {news.slice(0, 3).map((news) => (
-                        <NodeCardSmall key={news.id} node={news} />
+                    <div className="grid gap-14" data-cy="featured-news">
+                      {news.slice(0, 1).map((news) => (
+                        <NodeCard key={news.id} node={news} />
                       ))}
+                      <div className="grid grid-cols-2 gap-4">
+                        {news.slice(1, 3).map((news) => (
+                          <NodeCardSmall key={news.id} node={news} />
+                        ))}
+                      </div>
                     </div>
+
                   ) : (
                     <p>Geen resultaten gevonden.</p>
                   )}
@@ -111,7 +117,7 @@ export async function getStaticProps(
     {
       params: new DrupalJsonApiParams()
         .addFilter('status', '1')
-        .addSort('field_news_date', 'ASC')
+        .addSort('field_news_date', 'DESC')
         .addInclude(['field_news_image.image'])
         .addFields('node--news', [
           'id',
@@ -122,6 +128,7 @@ export async function getStaticProps(
           'field_news_image',
         ])
         .addFields('node--place', ['title', 'path'])
+        .addPageLimit(3)
         .getQueryObject(),
     },
   );
