@@ -39,7 +39,6 @@ export function NodeCard({ node, ...props }) {
 }
 
 export function NodeCardSmall({ node, ...props }) {
-    console.log(node);
     return (
         <article className="grid bg-secondary-10 rounded-lg grid-cols-1 relative mt-[90px] md:mt-0 md:ml-[80px]" {...props}>
             {node.field_article_image && (
@@ -54,12 +53,9 @@ export function NodeCardSmall({ node, ...props }) {
 
 
                     <div className="absolute top-0 w-full h-full">
-
                         <MediaImage className="w-full h-full"
-                                    media={node.field_article_image}
+                                    media={node.field_news_image}
                                     priority
-                                    layout="fill"
-                                    objectFit="cover"
                                     sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
                         />
                     </div>
