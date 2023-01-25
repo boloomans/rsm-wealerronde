@@ -6,18 +6,18 @@ export function NodeBook({ node }) {
   return (
     <article
       key={node.id}
-      className="grid max-w-xl grid-cols-3 gap-10 py-12 mx-auto"
+      className="mx-auto grid max-w-xl grid-cols-3 gap-10 py-12"
     >
       {node.field_book_image && (
         <div className="my-6 overflow-hidden rounded-md">
           <MediaImage media={node.field_book_image} priority />
         </div>
       )}
-      <div className="flex flex-col col-span-2 space-y-4">
+      <div className="col-span-2 flex flex-col space-y-4">
         <h1 className="mb-4 text-3xl font-black leading-tight md:text-4xl">
           {node.title}
         </h1>
-        <p className="mb-4 text-gray-600 dark:text-gray-300">
+        <p className="mb-4">
           {node.field_display_author?.title ? (
             <span>
             <span className="font-semibold">
@@ -41,12 +41,12 @@ export function NodeBookTeaser({ node }) {
   return (
     <article className="grid max-w-xl grid-cols-3 gap-10 py-4">
       {node.field_book_image && (
-        <Link className="block overflow-hidden no-underline rounded-md" href={node.path.alias} passHref>
+        <Link className="block overflow-hidden rounded-md no-underline" href={node.path.alias} passHref>
           <MediaImage media={node.field_book_image} priority />
         </Link>
       )}
       <div className="col-span-2">
-        <p className="mb-4 text-sm text-gray-500">
+        <p className="text-gray-500 mb-4 text-sm">
           {node.field_display_author?.title ? (
             <span>
               <span className="font-semibold">
@@ -55,12 +55,12 @@ export function NodeBookTeaser({ node }) {
             </span>
           ) : null}
         </p>
-        <Link className="no-underline hover:text-blue-600" href={node.path.alias} passHref>
+        <Link className="no-underline" href={node.path.alias} passHref>
             <h2 className="mb-4 text-xl font-bold">{node.title}</h2>
         </Link>
         {node.body && (
           <div
-            className="text-xs text-gray-600"
+            className="text-xs"
             dangerouslySetInnerHTML={ { __html: node.body.processed } }
           />
         )}

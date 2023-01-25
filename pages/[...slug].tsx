@@ -151,11 +151,9 @@ export async function getStaticProps(
     params.addInclude(['field_page_image.image']);
   }
 
-  if (type === 'node--article') {
+  if (type === 'node--news') {
     params.addInclude([
-      'field_article_media.image',
-      'field_article_image.image',
-      'field_display_author',
+      'field_news_image.image',
     ]);
   }
 

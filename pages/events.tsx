@@ -16,7 +16,7 @@ export default function EventPage({ menus, events }: EventsPageProps) {
   return (
     <Layout title="Events" menus={menus}>
       <PageHeader heading="Events" text="Upcoming Events." />
-      <div className="container px-6 pb-10 mx-auto">
+      <div className="container mx-auto px-6 pb-10">
         {events?.length ? (
           <div className="grid gap-14">
             {events.map((event) => (

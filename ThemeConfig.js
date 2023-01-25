@@ -23,11 +23,7 @@ export const Button = styled.button`
   color: ${props => props.primary ? "primary" : "white"};
 
   font-size: 1em;
-  border-radius: 50%;
-  height: 50px;
-  width: 50px;
- 
- 
+  border-radius: 50%; 
 `;
 
 

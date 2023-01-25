@@ -6,9 +6,9 @@ import { FormattedText } from 'components/formatted-text';
 export function NodePlace({ node, ...props }) {
   return (
     <article {...props}>
-      <div className="grid items-start w-full max-w-4xl gap-10 px-6 pt-12 mx-auto md:grid-cols-2">
+      <div className="mx-auto grid w-full max-w-4xl items-start gap-10 px-6 pt-12 md:grid-cols-2">
         {node.field_place_image && (
-          <Link className="block overflow-hidden no-underline rounded-md" href={node.path.alias} passHref>
+          <Link className="block overflow-hidden rounded-md no-underline" href={node.path.alias} passHref>
             <MediaImage
               media={node.field_place_image}
               priority
@@ -31,7 +31,7 @@ export function NodePlace({ node, ...props }) {
         </div>
       </div>
 
-      <div className="max-w-2xl px-6 py-10 mx-auto">
+      <div className="mx-auto max-w-2xl px-6 py-10">
         {node.body?.processed && (
           <div className="prose">
             <FormattedText processed={node.body.processed} />
@@ -45,11 +45,11 @@ export function NodePlace({ node, ...props }) {
 export function NodePlaceTeaser({ node, ...props }) {
   return (
     <article
-      className="items-start w-full grid-cols-2 gap-10 mx-auto space-y-4 md:space-y-0 md:grid"
+      className="mx-auto w-full grid-cols-2 items-start gap-10 space-y-4 md:grid md:space-y-0"
       {...props}
     >
       {node.field_place_image && (
-        <Link className="block overflow-hidden no-underline rounded-md" href={node.path.alias} passHref>
+        <Link className="block overflow-hidden rounded-md no-underline" href={node.path.alias} passHref>
           <MediaImage
             media={node.field_place_image}
             priority
@@ -58,7 +58,7 @@ export function NodePlaceTeaser({ node, ...props }) {
         </Link>
       )}
       <div className="space-y-4">
-        <Link className="no-underline hover:text-blue-600" href={node.path.alias} passHref>
+        <Link className="no-underline" href={node.path.alias} passHref>
           <h2 className="text-3xl font-bold">{node.title}</h2>
         </Link>
         {node.field_place_address && (

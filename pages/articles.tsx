@@ -16,9 +16,9 @@ export default function ArticlePage({ menus, articles }: ArticlesPageProps) {
   return (
     <Layout title="Articles" menus={menus}>
       <PageHeader heading="Articles" text="List of latest articles." />
-      <div className="container px-6 pb-10 mx-auto">
+      <div className="container mx-auto px-6 pb-10">
         {articles?.length ? (
-          <div className="grid gap-x-2 gap-y-12 md:gap-x-4 grid-cols-2">
+          <div className="grid grid-cols-2 gap-x-2 gap-y-12 md:gap-x-4">
             {articles.map((article) => (
               <NodeCardSmall key={article.id} node={article} />
             ))}

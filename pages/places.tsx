@@ -16,7 +16,7 @@ export default function PlacesPage({ menus, places }: PlacesPageProps) {
   return (
     <Layout title="Places" menus={menus}>
       <PageHeader heading="Places" text="Our Offices" />
-      <div className="container px-6 pb-10 mx-auto">
+      <div className="container mx-auto px-6 pb-10">
         {places?.length ? (
           <div className="grid gap-14">
             {places.map((place) => (

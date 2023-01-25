@@ -4,13 +4,14 @@ import { getMenus } from 'lib/get-menus';
 import {DrupalBlock, DrupalNode} from 'next-drupal';
 import { NodeEventTeaser } from '../components/node--event';
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
-import Image from "next/legacy/image";
 import Link from 'next/link';
 import { drupal } from '../lib/drupal';
 import { testApiCompatibility } from 'next-acms';
 import { ENTITY_TYPES } from './[...slug]';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {NodeCard, NodeCardSmall} from "../components/node--card";
+import {NodeCardBig, NodeCardSmall} from "../components/node--card";
+import {BlockHero} from "../components/block--hero";
+import React from "react";
 
 interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
@@ -20,9 +21,9 @@ interface IndexPageProps extends LayoutProps {
 }
 
 export default function IndexPage({ menus, news, events, banners, places }: IndexPageProps) {
-  console.log(news);
   return (
     <Layout title="Home" menus={menus} banners={banners}>
+      <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
           <div className="w-full">
@@ -34,11 +35,11 @@ export default function IndexPage({ menus, news, events, banners, places }: Inde
               </TabList>
 
               <TabPanel>
-                <div className="container pb-10 mx-auto mt-12">
+                <div className="container mx-auto mt-12 pb-10">
                   {news?.length ? (
                     <div className="grid gap-14" data-cy="featured-news">
                       {news.slice(0, 1).map((news) => (
-                        <NodeCard key={news.id} node={news} />
+                        <NodeCardBig key={news.id} node={news} />
                       ))}
                       <div className="grid grid-cols-2 gap-4">
                         {news.slice(1, 3).map((news) => (
@@ -53,8 +54,8 @@ export default function IndexPage({ menus, news, events, banners, places }: Inde
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="container px-6 pb-10 mx-auto mt-12">
-                  <h2 className="text-md mb-2 lg:text-2xl text-gray-600 dark:text-gray-400">
+                <div className="container mx-auto mt-12 px-6 pb-10">
+                  <h2 className="mb-2 lg:text-2xl">
                     Featured Events
                   </h2>
                   {events?.length ? (
@@ -69,8 +70,8 @@ export default function IndexPage({ menus, news, events, banners, places }: Inde
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="container px-6 pb-10 mx-auto mt-12 text-center items-center">
-                  <h2 className="text-md mb-2 lg:text-2xl text-gray-600">Contact Us</h2>
+                <div className="container mx-auto mt-12 items-center px-6 pb-10 text-center">
+                  <h2 className="mb-2 lg:text-2xl">Contact Us</h2>
                   {places?.length ? (
                     <div className="grid gap-14" data-cy="contact-us">
                       {places.slice(0, 3).map((place) => (
@@ -78,15 +79,13 @@ export default function IndexPage({ menus, news, events, banners, places }: Inde
                           <Link
                             href={place.path.alias}
                             passHref
-                            className="no-underline hover:text-blue-600">
-
+                            className="no-underline">
                             <h2 className="text-3xl font-bold">{place.title}</h2>
-
                           </Link>
-                          <p className="text-lg text-gray-600">
+                          <p className="text-lg">
                             {place.field_place_telephone}
                           </p>
-                          <p className="text-lg text-gray-600">
+                          <p className="text-lg">
                             {place.field_place_address.address_line1}
                           </p>
                         </article>

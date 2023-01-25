@@ -10,7 +10,7 @@ export default function BooksPage({ books, menus }) {
   return (
     <Layout title="Books" menus={menus}>
       <PageHeader heading="Books" text="A collection of books." />
-      <div className="container px-6 pb-10 mx-auto">
+      <div className="container mx-auto px-6 pb-10">
         {books?.length ? (
           <div>
             {books.map((book) => (

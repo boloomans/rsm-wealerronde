@@ -3,7 +3,7 @@ import { MediaImage } from 'components/media--image';
 
 export function NodeBasicPage({ node, ...props }) {
   return (
-    <article className="max-w-2xl px-6 py-10 mx-auto" {...props}>
+    <article className="mx-auto max-w-2xl px-6 py-10" {...props}>
       {node.field_page_image && (
         <div className="my-6 overflow-hidden rounded-md">
           <MediaImage

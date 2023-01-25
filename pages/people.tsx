@@ -16,7 +16,7 @@ export default function PeoplePage({ menus, people }: PeoplePageProps) {
   return (
     <Layout title="People" menus={menus}>
       <PageHeader heading="People" text="Our Team" className="text-center" />
-      <div className="container px-6 pb-10 mx-auto">
+      <div className="container mx-auto px-6 pb-10">
         {people?.length ? (
           <div className="grid gap-20 md:grid-cols-3">
             {people.map((person) => (

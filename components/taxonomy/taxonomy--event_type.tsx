@@ -12,7 +12,7 @@ export function TaxonomyEvent({
   return (
     <div>
       <PageHeader heading={taxonomy_term.name} text="" />
-      <div className="container px-6 pb-10 mx-auto">
+      <div className="container mx-auto px-6 pb-10">
         {additionalContent.nodes.length ? (
           <div className="grid gap-14">
             {additionalContent.nodes.map((node) => (

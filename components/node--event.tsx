@@ -6,10 +6,10 @@ import { FormattedText } from 'components/formatted-text';
 
 export function NodeEvent({ node, ...props }) {
   return (
-    <article className="container px-6 py-10 mx-auto" {...props}>
-      <div className="grid-cols-2 gap-10 p-4 mx-auto border rounded-md md:grid">
+    <article className="container mx-auto px-6 py-10" {...props}>
+      <div className="mx-auto grid-cols-2 gap-10 rounded-md border p-4 md:grid">
         {node.field_event_image && (
-          <Link className="block overflow-hidden no-underline rounded-md" href={node.path.alias} passHref>
+          <Link className="block overflow-hidden rounded-md no-underline" href={node.path.alias} passHref>
             <MediaImage
               media={node.field_event_image}
               priority
@@ -21,7 +21,7 @@ export function NodeEvent({ node, ...props }) {
         <div className="mt-8">
           <div className="mb-2 space-x-2 text-sm">
             {node.field_event_duration && (
-              <span className="font-medium text-gray-600">
+              <span className="font-medium">
                 {formatDate(node.field_event_start)}
               </span>
             )}
@@ -38,11 +38,11 @@ export function NodeEvent({ node, ...props }) {
           </div>
           <h1 className="mb-4 text-3xl font-bold">{node.title}</h1>
           {node.body?.summary && (
-            <p className="text-sm text-gray-500">{node.body.summary}</p>
+            <p className="text-gray-500 text-sm">{node.body.summary}</p>
           )}
         </div>
       </div>
-      <div className="max-w-2xl py-10 mx-auto ">
+      <div className="mx-auto max-w-2xl py-10 ">
         {node.body?.processed && (
           <div className="prose">
             <FormattedText processed={node.body.processed} />
@@ -56,11 +56,11 @@ export function NodeEvent({ node, ...props }) {
 export function NodeEventTeaser({ node, ...props }) {
   return (
     <article
-      className="items-start gap-10 p-4 mx-auto space-y-4 border rounded-md md:space-y-0 md:grid md:grid-cols-3"
+      className="mx-auto items-start gap-10 space-y-4 rounded-md border p-4 md:grid md:grid-cols-3 md:space-y-0"
       {...props}
     >
       {node.field_event_image && (
-        <Link className="block overflow-hidden no-underline rounded-md" href={node.path.alias} passHref>
+        <Link className="block overflow-hidden rounded-md no-underline" href={node.path.alias} passHref>
             <MediaImage
               media={node.field_event_image}
               priority
@@ -71,7 +71,7 @@ export function NodeEventTeaser({ node, ...props }) {
       <div className="col-span-2">
         <div className="mb-2 space-x-2 text-sm">
           {node.field_event_start && (
-            <span className="font-medium text-gray-600 dark:text-gray-400">
+            <span className="dark:text-gray-400 font-medium">
               {formatDate(node.field_event_start)}
             </span>
           )}
@@ -86,11 +86,11 @@ export function NodeEventTeaser({ node, ...props }) {
             </span>
           )}
         </div>
-        <Link className="no-underline hover:text-blue-600 dark:hover:text-gray-600" href={node.path.alias} passHref>
+        <Link className="dark:hover:no-underline" href={node.path.alias} passHref>
           <h2 className="mb-4 text-3xl font-bold">{node.title}</h2>
         </Link>
         {node.body?.summary && (
-          <p className="text-sm text-gray-500">{node.body.summary}</p>
+          <p className="text-gray-500 text-sm">{node.body.summary}</p>
         )}
       </div>
     </article>

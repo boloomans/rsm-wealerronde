@@ -20,6 +20,7 @@ const options: HTMLReactParserOptions = {
         } = domNode.attribs;
 
         if (isRelative(src)) {
+          // @ts-ignore
           return (
             <div className={className}>
               <Image

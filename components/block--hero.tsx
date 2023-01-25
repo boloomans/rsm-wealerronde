@@ -1,10 +1,6 @@
 import classNames from 'classnames';
 import React, { HTMLAttributes } from 'react';
 import Image from "next/legacy/image";
-import {FaRegCalendarAlt} from "react-icons/fa";
-import {Button} from "../ThemeConfig";
-import {BiChevronRight} from "react-icons/bi";
-import Link from "next/link";
 import {BlockBanner} from "./block--banner";
 import {DrupalBlock} from "next-drupal";
 
@@ -17,12 +13,12 @@ interface BlockHeroProps {
 export function BlockHero({ heading, banner, className }: BlockHeroProps) {
   return (
     <div className={classNames('relative', className)}>
-      <div className="z-10 relative flex flex-col space-y-2 px-6 py-20 lg:py-48 mx-auto container">
-        <h1 className="font-display font-bold text-primary-900 text-[22px] lg:text-5xl leading-tight">{heading}</h1>
+      <div className="container relative z-10 mx-auto flex flex-col space-y-2 px-6 py-20 lg:py-48">
+        <h1 className="font-display text-[22px] font-bold leading-tight text-primary-900 lg:text-5xl">{heading}</h1>
         {banner && <BlockBanner key={undefined} block={undefined}/>}
         <BlockBanner block={undefined}></BlockBanner>
       </div>
-      <Image priority className="-z-10 opacity-20 object-cover lg:object-custom" src="/hero.jpg" alt="Logo" layout="fill" />
+      <Image priority className="-z-10 object-cover opacity-20 lg:object-custom" src="/hero.jpg" alt="Logo" layout="fill" />
     </div>
   );
 }

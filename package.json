@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint .",
+    "lint:fix": "next lint . --fix",
     "preview": "next build && next start"
   },
   "dependencies": {
@@ -20,6 +21,7 @@
     "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "drupal-jsonapi-params": "^2.1.0",
+    "eslint-plugin-tailwindcss": "^3.8.2",
     "formik": "^2.2.9",
     "html-react-parser": "^1.4.8",
     "next": "^13.1.4",
