@@ -1,9 +1,9 @@
 import Link from 'next/link';
-
 import { MediaImage } from 'components/media--image';
 import { FormattedText } from 'components/formatted-text';
 
-export function NodePlace({ node, ...props }) {
+export function NodePlace({node, ...props}) {
+
   return (
     <article {...props}>
       <div className="mx-auto grid w-full max-w-4xl items-start gap-10 px-6 pt-12 md:grid-cols-2">
@@ -21,20 +21,19 @@ export function NodePlace({ node, ...props }) {
           {node.field_place_address && (
             <div>
               {node.field_place_address.address_line1}
-              <br />
               {node.field_place_address.locality},{' '}
               {node.field_place_address.administrative_area}{' '}
               {node.field_place_address.postal_code}
             </div>
           )}
-          {node.field_place_telephone && <p>{node.field_place_telephone}</p>}
+          {node.field_place_telephone &&
+            <p>{node.field_place_telephone}</p>}
         </div>
       </div>
-
       <div className="mx-auto max-w-2xl px-6 py-10">
         {node.body?.processed && (
           <div className="prose">
-            <FormattedText processed={node.body.processed} />
+            <FormattedText processed={node.body.processed}/>
           </div>
         )}
       </div>
@@ -42,12 +41,9 @@ export function NodePlace({ node, ...props }) {
   );
 }
 
-export function NodePlaceTeaser({ node, ...props }) {
+export function NodePlaceTeaser({node, ...props}) {
   return (
-    <article
-      className="mx-auto w-full grid-cols-2 items-start gap-10 space-y-4 md:grid md:space-y-0"
-      {...props}
-    >
+    <article className="mx-auto w-full grid-cols-2 items-start gap-10 space-y-4 md:grid md:space-y-0" {...props} >
       {node.field_place_image && (
         <Link className="block overflow-hidden rounded-md no-underline" href={node.path.alias} passHref>
           <MediaImage
@@ -64,13 +60,14 @@ export function NodePlaceTeaser({ node, ...props }) {
         {node.field_place_address && (
           <div>
             {node.field_place_address.address_line1}
-            <br />
-            {node.field_place_address.locality},{' '}
+            <br/> {node.field_place_address.locality},{' '}
             {node.field_place_address.administrative_area}{' '}
             {node.field_place_address.postal_code}
           </div>
         )}
-        {node.field_place_telephone && <p>{node.field_place_telephone}</p>}
+        {node.field_place_telephone &&
+          <p>{node.field_place_telephone}</p>
+        }
       </div>
     </article>
   );

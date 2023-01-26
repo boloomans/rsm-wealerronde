@@ -15,7 +15,7 @@ interface ArticlesPageProps extends LayoutProps {
 export default function ArticlePage({ menus, articles }: ArticlesPageProps) {
   return (
     <Layout title="Articles" menus={menus}>
-      <PageHeader heading="Articles" text="List of latest articles." />
+      <PageHeader heading="Articles" text="List of latest articles." className="text-primary-900"/>
       <div className="container mx-auto px-6 pb-10">
         {articles?.length ? (
           <div className="grid grid-cols-2 gap-x-2 gap-y-12 md:gap-x-4">

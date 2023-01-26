@@ -1,18 +1,20 @@
 import { GetStaticPropsResult } from 'next';
 import { Layout, LayoutProps } from 'components/layout';
 import { getMenus } from 'lib/get-menus';
-import {DrupalBlock, DrupalFile, DrupalMedia, DrupalNode} from 'next-drupal';
-import { NodeEventTeaser } from '../components/node--event';
+import { DrupalBlock, DrupalFile, DrupalMedia, DrupalNode } from 'next-drupal';
+
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 import Link from 'next/link';
 import { drupal } from '../lib/drupal';
 import { testApiCompatibility } from 'next-acms';
 import { ENTITY_TYPES } from './[...slug]';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {NodeCardBig, NodeCardSmall} from "../components/node--news";
-import {BlockHero} from "../components/block--hero";
+import { NodeCardBig, NodeCardSmall } from "../components/node--news";
+import { BlockHero } from "../components/block--hero";
 import React from "react";
-import {MediaFotobookTeaser} from "../components/media--fotobook";
+import { MediaFotobookTeaser } from "../components/media--fotobook";
+import { PageHeader } from '../components/page-header';
+import { NodeSponsorTeaser } from '../components/node--sponsors';
 
 interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
@@ -20,10 +22,11 @@ interface IndexPageProps extends LayoutProps {
   places: DrupalNode[];
   banners?: DrupalBlock[];
   fotoBooks?: DrupalFile[];
+  sponsors?: DrupalNode[];
 }
 
-export default function IndexPage({ menus, news, events, banners, fotoBooks, places }: IndexPageProps) {
-  console.log(fotoBooks);
+export default function IndexPage({menus, news, sponsors, banners, fotoBooks, places}: IndexPageProps) {
+  console.log(sponsors);
   return (
     <Layout title="Home" menus={menus} banners={banners}>
       <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
@@ -42,11 +45,11 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                   {news?.length ? (
                     <div className="grid gap-14" data-cy="featured-news">
                       {news.slice(0, 1).map((news) => (
-                        <NodeCardBig key={news.id} node={news} />
+                        <NodeCardBig key={news.id} node={news}/>
                       ))}
                       <div className="grid grid-cols-2 gap-4">
                         {news.slice(1, 3).map((news) => (
-                          <NodeCardSmall key={news.id} node={news} />
+                          <NodeCardSmall size="small" key={news.id} node={news}/>
                         ))}
                       </div>
                     </div>
@@ -55,13 +58,31 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                     <p>Geen resultaten gevonden.</p>
                   )}
                 </div>
+
+                <div>
+                  <PageHeader heading="Onze Sponsoren" text="List of latest articles."
+                              className="text-blue-900"/>
+                </div>
+
+                <div className="container mx-auto pb-10">
+                  {sponsors?.length ? (
+                    <div className="grid grid-cols-2 gap-4">
+                      {sponsors.map((sponsor) => (
+                        <NodeSponsorTeaser key={sponsor.id} sponsor={sponsor}/>
+                      ))}
+                    </div>
+                  ) : (
+                    <p>Geen resultaten gevonden.</p>
+                  )}
+                </div>
+
               </TabPanel>
               <TabPanel>
                 <div className="container mx-auto mt-12 px-6 pb-10">
                   {fotoBooks?.length ? (
                     <div className="grid gap-14" data-cy="featured-fotoBooks">
                       {fotoBooks.slice(0, 3).map((fotoBook) => (
-                        <MediaFotobookTeaser key={fotoBook.id} media={fotoBook} />
+                        <MediaFotobookTeaser key={fotoBook.id} media={fotoBook}/>
                       ))}
                     </div>
                   ) : (
@@ -177,12 +198,33 @@ export async function getStaticProps(
       params: new DrupalJsonApiParams()
         .addFilter('status', '1')
         .addSort('title', 'ASC')
+        .addInclude(['field_place_image.image'])
         .addFields('node--place', [
           'id',
           'title',
           'path',
           'field_place_address',
           'field_place_telephone',
+          'field_place_image',
+        ])
+        .getQueryObject(),
+    },
+  );
+  const sponsors = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    'node--sponsoren',
+    context,
+    {
+      params: new DrupalJsonApiParams()
+        .addFilter('status', '1')
+        .addSort('sticky', 'DESC')
+        .addSort('title', 'DESC')
+        .addInclude(['field_logo.image'])
+        .addFields('node--sponsoren', [
+          'id',
+          'title',
+          'field_description',
+          'field_logo',
+          'field_website_link',
         ])
         .getQueryObject(),
     },
@@ -194,6 +236,7 @@ export async function getStaticProps(
       events,
       places,
       fotoBooks,
+      sponsors,
     },
     revalidate: 60,
   };
