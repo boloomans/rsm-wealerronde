@@ -28,7 +28,6 @@ export function MediaImage({
                              ...props
                            }: MediaImageProps) {
   const image = media?.image;
-
   if (!image) {
     return null;
   }
@@ -66,6 +65,7 @@ export function MediaImage({
   }
 
   return (
+    // eslint-disable-next-line tailwindcss/no-custom-classname
     <div className="media__content image__wrapper" {...props}>
       <Image
         src={srcURL}

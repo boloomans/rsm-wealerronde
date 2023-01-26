@@ -7,7 +7,7 @@ import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 
 import { getMenus } from '../lib/get-menus';
 import { Layout, LayoutProps } from '../components/layout';
-import { NodeCard } from '../components/node--card';
+import { NodeNews } from '../components/node--news';
 import { NodeEvent } from '../components/node--event';
 import { NodePerson } from '../components/node--person';
 import { NodePlace } from '../components/node--place';
@@ -19,7 +19,6 @@ import { TaxonomyEvent } from '../components/taxonomy/taxonomy--event_type';
 import { TaxonomyPlace } from '../components/taxonomy/taxonomy--place_type';
 import { getPrioritizedStaticPathsFromContext } from '../lib/get-prioritized-static-paths';
 import { GetStaticPathsContext } from 'next/types';
-import {NodeBook} from "../components/node--book";
 
 // List of all the entity types handled by this route.
 export const ENTITY_TYPES = [
@@ -52,7 +51,7 @@ export default function EntityPage({
         <NodeBasicPage node={entity as DrupalNode} />
       )}
       {entity.type === 'node--news' && (
-        <NodeCard node={entity as DrupalNode} />
+        <NodeNews node={entity as DrupalNode} />
       )}
       {entity.type === 'node--event' && (
         <NodeEvent node={entity as DrupalNode} />
@@ -154,6 +153,7 @@ export async function getStaticProps(
   if (type === 'node--news') {
     params.addInclude([
       'field_news_image.image',
+      'field_banner',
     ]);
   }
 
@@ -169,10 +169,6 @@ export async function getStaticProps(
 
   if (type === 'node--place') {
     params.addInclude(['field_place_image.image']);
-  }
-
-  if (type === "node--book") {
-    params.addInclude(["field_display_author", "field_book_image.image"])
   }
 
   const entity = await drupal.getResourceFromContext<

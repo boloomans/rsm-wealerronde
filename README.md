@@ -67,7 +67,7 @@ Visit [http://localhost:3000](http://localhost:3000) to view the headless site.
 │   ├── media--image.tsx
 │   ├── menu--footer.tsx
 │   ├── menu--main.tsx
-│   ├── node--card.tsx
+│   ├── node--news.tsx
 │   └── node--page.tsx
 ├── lib
 │   └── format-date.ts

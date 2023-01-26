@@ -1,7 +1,10 @@
-import Image from "next/legacy/image";
+import Image from 'next/image';
 import Link from 'next/link';
-import parse, { HTMLReactParserOptions, domToReact } from 'html-react-parser';
-import { Element } from 'domhandler/lib/node';
+import parse, {
+  HTMLReactParserOptions,
+  domToReact,
+  Element,
+} from 'html-react-parser';
 import { absoluteURL } from '../lib/absolute-url';
 
 import { isRelative } from 'lib/is-relative';
@@ -15,21 +18,19 @@ const options: HTMLReactParserOptions = {
           src,
           alt,
           class: className,
-          width = '100px',
-          height = '100px',
+          width = '100',
+          height = '100',
         } = domNode.attribs;
 
         if (isRelative(src)) {
-          // @ts-ignore
           return (
             <div className={className}>
               <Image
                 src={absoluteURL(`/${src}`)}
-                width={`${width}px`}
-                height={`${height}px`}
+                width={Number(width)}
+                height={Number(height)}
                 alt={alt}
-                layout="intrinsic"
-                objectFit="cover"
+                sizes="(min-width: 768px) 625px, 100vw"
               />
             </div>
           );
@@ -42,7 +43,7 @@ const options: HTMLReactParserOptions = {
 
         if (href && isRelative(href)) {
           return (
-            <Link className={className} href={href} passHref>
+            <Link href={href} className={className}>
               {domToReact(domNode.children)}
             </Link>
           );

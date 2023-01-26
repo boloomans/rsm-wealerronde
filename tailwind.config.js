@@ -1,3 +1,5 @@
+const { fontFamily } = require('tailwindcss/defaultTheme');
+
 module.exports = {
   darkMode: ['class', '.dark-mode'],
   mode: 'jit',
@@ -7,9 +9,9 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      display: ['PT Sans', 'sans-serif'],
-      body: ['PT Sans', 'sans-serif'],
-      title: ['PT Serif','serif'],
+      display: ['var(--iv-pt-sans-font)', ...fontFamily.sans],
+      body: ['var(--iv-pt-sans-font)', ...fontFamily.sans],
+      title: ['var(--iv-pt-serif-font)', ...fontFamily.serif],
     },
     colors: {
       primary: {
@@ -44,6 +46,16 @@ module.exports = {
           xl: '1140px',
         },
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            '--tw-prose-headings': theme('colors.secondary.900'),
+            h1: {
+              fontWeight: 700
+            },
+          },
+        },
+      }),
       objectPosition: {
         'custom': '0 -240px',
       }

@@ -1,7 +1,7 @@
 import { GetStaticPropsResult } from 'next';
 import { Layout, LayoutProps } from 'components/layout';
 import { getMenus } from 'lib/get-menus';
-import {DrupalBlock, DrupalNode} from 'next-drupal';
+import {DrupalBlock, DrupalFile, DrupalMedia, DrupalNode} from 'next-drupal';
 import { NodeEventTeaser } from '../components/node--event';
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 import Link from 'next/link';
@@ -9,18 +9,21 @@ import { drupal } from '../lib/drupal';
 import { testApiCompatibility } from 'next-acms';
 import { ENTITY_TYPES } from './[...slug]';
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
-import {NodeCardBig, NodeCardSmall} from "../components/node--card";
+import {NodeCardBig, NodeCardSmall} from "../components/node--news";
 import {BlockHero} from "../components/block--hero";
 import React from "react";
+import {MediaFotobookTeaser} from "../components/media--fotobook";
 
 interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
   events: DrupalNode[];
   places: DrupalNode[];
   banners?: DrupalBlock[];
+  fotoBooks?: DrupalFile[];
 }
 
-export default function IndexPage({ menus, news, events, banners, places }: IndexPageProps) {
+export default function IndexPage({ menus, news, events, banners, fotoBooks, places }: IndexPageProps) {
+  console.log(fotoBooks);
   return (
     <Layout title="Home" menus={menus} banners={banners}>
       <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
@@ -55,13 +58,10 @@ export default function IndexPage({ menus, news, events, banners, places }: Inde
               </TabPanel>
               <TabPanel>
                 <div className="container mx-auto mt-12 px-6 pb-10">
-                  <h2 className="mb-2 lg:text-2xl">
-                    Featured Events
-                  </h2>
-                  {events?.length ? (
-                    <div className="grid gap-14" data-cy="featured-events">
-                      {events.slice(0, 3).map((event) => (
-                        <NodeEventTeaser key={event.id} node={event} />
+                  {fotoBooks?.length ? (
+                    <div className="grid gap-14" data-cy="featured-fotoBooks">
+                      {fotoBooks.slice(0, 3).map((fotoBook) => (
+                        <MediaFotobookTeaser key={fotoBook.id} media={fotoBook} />
                       ))}
                     </div>
                   ) : (
@@ -131,6 +131,24 @@ export async function getStaticProps(
         .getQueryObject(),
     },
   );
+  const fotoBooks = await drupal.getResourceCollectionFromContext<DrupalFile[]>(
+    'media--fotoboek',
+    context,
+    {
+      params: new DrupalJsonApiParams()
+        .addFilter('status', '1')
+        .addInclude(['field_media_image'])
+        .addFields('media--fotoboek', [
+          'id',
+          'path',
+          'attributes',
+          'field_description',
+          'field_media_image',
+        ])
+        .addPageLimit(4)
+        .getQueryObject(),
+    },
+  );
   const events = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
     'node--event',
     context,
@@ -175,6 +193,7 @@ export async function getStaticProps(
       news,
       events,
       places,
+      fotoBooks,
     },
     revalidate: 60,
   };

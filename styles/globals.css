@@ -9,7 +9,7 @@
 }
 :root {
     --iv-bold: 700;
-    --iv-display: 'PT Sans', 'sans-serif';
+    --iv-pt-sans-font: 'PT Sans', 'sans-serif';
     --iv-white: #FFF;
     --iv-primary: #D6B46A;
     --iv-secondary: #D6B46A;
@@ -50,7 +50,7 @@
     cursor: pointer;
     background: transparent;
     color: var(--iv-secondary);
-    font-family: var(--iv-display);
+    font-family: var(--iv-pt-sans-font);
     font-weight: var(--iv-bold);
     font-size: 14px;
 }
