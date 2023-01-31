@@ -20,15 +20,15 @@ interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
   events: DrupalNode[];
   places: DrupalNode[];
-  banners?: DrupalBlock[];
+  banners?: DrupalNode[];
   fotoBooks?: DrupalFile[];
   sponsors?: DrupalNode[];
 }
 
-export default function IndexPage({menus, news, sponsors, banners, fotoBooks, places}: IndexPageProps) {
-  console.log(sponsors);
+export default function IndexPage({ menus, news, events, banners, fotoBooks, places }: IndexPageProps) {
+  console.log(fotoBooks);
   return (
-    <Layout title="Home" menus={menus} banners={banners}>
+    <Layout title="Home" menus={menus}>
       <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
@@ -43,14 +43,14 @@ export default function IndexPage({menus, news, sponsors, banners, fotoBooks, pl
               <TabPanel>
                 <div className="container mx-auto mt-12 pb-10">
                   {news?.length ? (
-                    <div className="grid gap-14" data-cy="featured-news">
+                    <div className="grid gap-4 lg:gap-14" data-cy="featured-news">
                       {news.slice(0, 1).map((news) => (
                         <NodeCardBig
                           key={news.id}
                           node={news}
                         />
                       ))}
-                      <div className="grid grid-cols-2 gap-4">
+                      <div className="grid grid-cols-2 gap-2">
                         {news.slice(1, 3).map((news) => (
                           <NodeCardSmall
                             key={news.id}
@@ -87,9 +87,9 @@ export default function IndexPage({menus, news, sponsors, banners, fotoBooks, pl
 
               </TabPanel>
               <TabPanel>
-                <div className="container mx-auto mt-12 px-6 pb-10">
+                <div className="container mx-auto pb-10">
                   {fotoBooks?.length ? (
-                    <div className="grid gap-14" data-cy="featured-fotoBooks">
+                    <div className="mt-12 grid grid-cols-2 gap-2" data-cy="featured-fotoBooks">
                       {fotoBooks.slice(0, 3).map((fotoBook) => (
                         <MediaFotobookTeaser key={fotoBook.id} media={fotoBook}/>
                       ))}
@@ -171,7 +171,8 @@ export async function getStaticProps(
         .addFields('media--fotoboek', [
           'id',
           'path',
-          'attributes',
+          'name',
+          'field_title',
           'field_description',
           'field_media_image',
         ])

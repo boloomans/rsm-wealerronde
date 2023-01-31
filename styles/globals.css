@@ -1,4 +1,6 @@
 @import "react-toggle/style.css";
+@import "react-grid-layout/css/styles.css";
+@import "react-resizable/css/styles.css";
 
 @tailwind base;
 @tailwind components;
@@ -85,14 +87,56 @@
     cursor: default;
 }
 
-.react-tabs__tab:focus {
-    outline: none;
-}
-
 .react-tabs__tab-panel {
     display: none;
 }
 
 .react-tabs__tab-panel--selected {
     display: block;
+}
+
+/* MASONRY STYLING */
+.my-masonry-grid {
+    display: -webkit-box; /* Not needed if autoprefixing */
+    display: -ms-flexbox; /* Not needed if autoprefixing */
+    display: flex;
+    margin-left: -10px; /* gutter size offset */
+    width: auto;
+}
+.my-masonry-grid_column {
+    padding-left: 10px; /* gutter size */
+    background-clip: padding-box;
+}
+
+/* Style your items */
+.my-masonry-grid_column > div { /* change div to reference your elements you put in <Masonry> */
+    margin-bottom: 10px;
+}
+/* MASONRY STYLING */
+
+/* FANCYBOX STYLING */
+.carousel__viewport{
+    max-width: 60% !important;
+    margin: 0 auto !important;
+}
+
+.carousel__button.is-prev, .carousel__button.is-next{
+    transform: unset !important;
+    bottom: -9% !important;
+    top: unset !important;
+
+    box-shadow: none;
+    background: var(--iv-secondary);
+    border-radius: 50%;
+}
+
+@screen lg {
+    .carousel__button.is-prev, .carousel__button.is-next{
+        bottom: -6% !important;
+    }
+}
+/* FANCYBOX STYLING */
+
+.custom-marker{
+
 }

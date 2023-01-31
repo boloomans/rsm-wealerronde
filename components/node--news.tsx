@@ -8,38 +8,41 @@ import {FormattedText} from "./formatted-text";
 import BackButton from "./backButton";
 import {BlockBanner} from "./block--banner";
 
-export function NodeNews({ node, ...props }) {
-    return (
-        <article {...props}>
-            {node.field_news_image && (
-                <div className="relative block overflow-hidden object-fill no-underline">
-                    <BackButton></BackButton>
-                    <MediaImage
-                        media={node.field_news_image}
-                        priority
-                        imageStyle="coh_xx_large_super_landscape"
-                    />
-                </div>
-            )}
-          <div className="container prose-sm relative mx-auto mt-7 mb-10 px-4 md:mt-16 md:prose md:px-0">
-            <span className="font-body text-xs font-bold text-secondary-900 md:text-base">{formatDate(node.field_news_date)}</span>
-            <h1 className="font-body text-lg font-bold text-secondary-900 md:text-xl">{node.title}</h1>
-            {node.body?.processed && (
-              <div className="prose break-keep font-body text-sm leading-5 text-black-900 dark:prose-invert md:text-lg md:leading-8" data-cy="summary">
-                <FormattedText processed={node.body.processed} />
-              </div>
-            )}
-          </div>
 
-          {node?.field_banner.length ? (
-            <div className="container relative mx-auto my-12 flex flex-col px-4 sm:items-center">
-              {node.field_banner.slice(0, 2).map((banner) => (
-                <BlockBanner key={banner.id} banner={banner} />
-              ))}
-            </div>
-          ): ''}
-        </article>
-    );
+export function NodeNews({node, ...props}) {
+  return (
+    <article {...props}>
+      {node.field_news_image && (
+        <div className="relative block overflow-hidden object-fill no-underline">
+          <BackButton></BackButton>
+          <MediaImage
+            media={node.field_news_image}
+            priority
+            imageStyle="coh_xx_large_super_landscape"
+          />
+        </div>
+      )}
+      <div className="container prose-sm relative mx-auto mt-7 mb-10 px-4 md:mt-16 md:prose md:px-0">
+        <span
+          className="font-body text-xs font-bold text-secondary-900 md:text-base">{formatDate(node.field_news_date)}</span>
+        <h1 className="font-body text-lg font-bold text-secondary-900 md:text-xl">{node.title}</h1>
+        {node.body?.processed && (
+          <div
+            className="prose break-keep font-body text-sm leading-5 text-black-900 dark:prose-invert md:text-lg md:leading-8"
+            data-cy="summary">
+            <FormattedText processed={node.body.processed}/>
+          </div>
+        )}
+      </div>
+      {node?.field_banner.length ? (
+        <div className="container relative mx-auto my-12 flex flex-col px-4 sm:items-center">
+          {node.field_banner.slice(0, 2).map((banner) => (
+            <BlockBanner key={banner.id} banner={banner}/>
+          ))}
+        </div>
+      ) : ''}
+    </article>
+  );
 }
 
 export function NodeCardBig({ node, ...props }) {
