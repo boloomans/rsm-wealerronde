@@ -74,6 +74,7 @@ export function MediaImage({
         priority={priority}
         sizes={sizes}
         fill={fill}
+        height={height}
         quality={quality}
         blurDataURL={blurDataURL}
         loading={loading}

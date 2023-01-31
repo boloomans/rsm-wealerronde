@@ -45,11 +45,18 @@ export default function IndexPage({menus, news, sponsors, banners, fotoBooks, pl
                   {news?.length ? (
                     <div className="grid gap-14" data-cy="featured-news">
                       {news.slice(0, 1).map((news) => (
-                        <NodeCardBig key={news.id} node={news}/>
+                        <NodeCardBig
+                          key={news.id}
+                          node={news}
+                        />
                       ))}
                       <div className="grid grid-cols-2 gap-4">
                         {news.slice(1, 3).map((news) => (
-                          <NodeCardSmall size="small" key={news.id} node={news}/>
+                          <NodeCardSmall
+                            key={news.id}
+                            node={news}
+                            size="small"
+                          />
                         ))}
                       </div>
                     </div>
@@ -66,15 +73,17 @@ export default function IndexPage({menus, news, sponsors, banners, fotoBooks, pl
 
                 <div className="container mx-auto pb-10">
                   {sponsors?.length ? (
-                    <div className="grid grid-cols-2 gap-4">
-                      {sponsors.map((sponsor) => (
-                        <NodeSponsorTeaser key={sponsor.id} sponsor={sponsor}/>
-                      ))}
+                    <div className="">
+                      <NodeSponsorTeaser
+                        sponsors={sponsors}/>
                     </div>
                   ) : (
                     <p>Geen resultaten gevonden.</p>
                   )}
                 </div>
+
+
+
 
               </TabPanel>
               <TabPanel>

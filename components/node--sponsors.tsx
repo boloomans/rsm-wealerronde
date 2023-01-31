@@ -1,12 +1,22 @@
 import Link from 'next/link';
 import { MediaImage } from 'components/media--image';
 import { FormattedText } from 'components/formatted-text';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import SwiperCore, { Autoplay } from 'swiper';
 
-export function NodeSponsor({ node, ...props }) {
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import { DrupalNode } from 'next-drupal';
+
+
+interface Sponsorsprops {
+  sponsors?: DrupalNode[];
+  logo?: any;
+}
+
+export function NodeSponsor({node, ...props}) {
   return (
     <article {...props}>
       <div className="mx-auto grid w-full max-w-4xl items-start gap-10 px-6 pt-12 md:grid-cols-2">
@@ -24,7 +34,7 @@ export function NodeSponsor({ node, ...props }) {
           {node.field_place_address && (
             <div>
               {node.field_place_address.address_line1}
-              <br />
+              <br/>
               {node.field_place_address.locality},{' '}
               {node.field_place_address.administrative_area}{' '}
               {node.field_place_address.postal_code}
@@ -37,7 +47,7 @@ export function NodeSponsor({ node, ...props }) {
       <div className="mx-auto max-w-2xl px-6 py-10">
         {node.body?.processed && (
           <div className="prose">
-            <FormattedText processed={node.body.processed} />
+            <FormattedText processed={node.body.processed}/>
           </div>
         )}
       </div>
@@ -45,52 +55,89 @@ export function NodeSponsor({ node, ...props }) {
   );
 }
 
-function SponsorLogo({ logo, ...props }) {
-  return(
-      <div {...props}>
-        {logo.field_logo && (
-          <Link className="block overflow-hidden rounded-md bg-white-900 no-underline hover:shadow-black-900 hover:drop-shadow-[0_3px_6px_rgba(214,214,214,1)]" href={logo.field_website_link.uri} target={'_blank'} passHref>
-            <MediaImage className="p-4"
-                        media={logo.field_logo}
-                        priority
-                        sizes="(min-width: 968px) 425px, (min-width: 768px) 50vw, 100vw"
-            />
-          </Link>
-        )}
-      </div>
+
+//Sponsors klein blok
+export function NodeSponsorTeaser({sponsors, ...props}: Sponsorsprops) {
+  const [mQuery, setMQuery] = useState<any>({
+    matches: window.innerWidth > 768,
+  });
+
+  useEffect(() => {
+    let mediaQuery = window.matchMedia("(min-width: 768px)");
+    mediaQuery.addEventListener('change', setMQuery);
+    // this is the cleanup function to remove the listener
+    return () => mediaQuery.removeEventListener('change', ev => setMQuery(ev.matches));
+  }, []);
+  // MediaQueryListEvent { isTrusted: true, media: "(min-width: 768px)", matches: true ...}
+
+  if(mQuery && !mQuery.matches){
+    return (
+      <section className="mx-auto grid grid-cols-2 auto-rows-max place-items-center h-full gap-4 space-y-4 md:space-y-0" {...props}>
+        {sponsors.map((sponsor) => (
+          <SponsorLogo key={sponsor.id} logo={sponsor}/>
+        ))}
+      </section>
+    )
+  } else {
+    return (
+      <section className="mx-auto w-full h-full" {...props}>
+        <SponsorSwiper sponsors={sponsors}></SponsorSwiper>
+      </section>
+    )
+  }
+}
+
+//Swiper
+function SponsorSwiper({sponsors, ...props}) {
+  return (
+    <div  {...props}>
+      {sponsors?.length ? (
+        <Swiper
+          modules={[ Autoplay ]}
+          spaceBetween={40}
+          slidesPerView={5}
+          height={200}
+          autoplay={{
+            delay: 5000
+          }}
+
+          onSlideChange={() => console.log('slide change')}
+          onSwiper={(swiper) => console.log(swiper)}
+
+        >
+          {sponsors.map((sponsor) => (
+            <SwiperSlide key={sponsor.id} className="">
+              <SponsorLogo logo={sponsor}/>
+            </SwiperSlide>
+          ))}
+
+        </Swiper>
+      ) : (
+        <p>Geen resultaten gevonden.</p>
+      )}
+    </div>
+  );
+}
+
+//Logo Image
+function SponsorLogo({logo, ...props}) {
+  return (
+    <div {...props} className="h-full hover:shadow-black-900 hover:drop-shadow-[0_3px_6px_rgba(214,214,214,1)] m-0">
+      {logo.field_logo && (
+        <Link
+          className="block h-full overflow-hidden rounded-md bg-white-900 no-underline"
+          href={logo.field_website_link.uri} target={'_blank'} passHref>
+          <MediaImage className="p-4 h-full"
+                      media={logo.field_logo}
+                      imageStyling={{
+                        objectFit: "contain",
+                        height: "100%"
+                      }}
+                      priority
+                      sizes="(min-width: 968px) 425px, (min-width: 768px) 50vw, 100vw"
+          />
+        </Link>
+      )}
+    </div>
   )
 }
-
-function SponsorSwiper() {
-  return (
-    <Swiper
-      spaceBetween={20}
-      slidesPerView={5}
-      autoplay={true}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
-      <SwiperSlide>Slide 1</SwiperSlide>
-      <SwiperSlide>Slide 2</SwiperSlide>
-      <SwiperSlide>Slide 3</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-      <SwiperSlide>Slide 4</SwiperSlide>
-      ...
-    </Swiper>
-  );
-};
-
-
-
-
-export function NodeSponsorTeaser({ sponsor, ...props }) {
-  return (
-    <article className="mx-auto w-full grid-cols-5 items-start gap-10 space-y-4 md:grid md:space-y-0" {...props}>
-
-      {/*<SponsorLogo logo={sponsor}></SponsorLogo>*/}
-
-      <SponsorSwiper></SponsorSwiper>
-    </article>
-  );
-}
-
