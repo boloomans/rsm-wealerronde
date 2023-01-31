@@ -25,7 +25,7 @@ interface IndexPageProps extends LayoutProps {
   sponsors?: DrupalNode[];
 }
 
-export default function IndexPage({ menus, news, events, banners, fotoBooks, places }: IndexPageProps) {
+export default function IndexPage({ menus, news, events, banners, fotoBooks, places, sponsors, }: IndexPageProps) {
   console.log(fotoBooks);
   return (
     <Layout title="Home" menus={menus}>
