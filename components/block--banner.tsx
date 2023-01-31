@@ -1,16 +1,14 @@
 import React, {HTMLAttributes} from 'react';
-import {FaRegCalendarAlt} from "react-icons/fa";
 import {Button} from "../ThemeConfig";
 import {BiChevronRight} from "react-icons/bi";
 import Link from "next/link";
-import {DrupalBlock} from "next-drupal";
+import {DrupalNode} from "next-drupal";
 import {absoluteURL} from "../lib/absolute-url";
-import {absolutePathToPage} from "next/dist/shared/lib/page-path/absolute-path-to-page";
 
 interface BlockBannerProps {
   heading?: string;
   text?: string;
-  banner?: DrupalBlock
+  banner?: DrupalNode
   className?: HTMLAttributes<HTMLDivElement>['className'];
 }
 

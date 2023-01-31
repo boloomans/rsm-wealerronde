@@ -19,6 +19,7 @@ import { TaxonomyEvent } from '../components/taxonomy/taxonomy--event_type';
 import { TaxonomyPlace } from '../components/taxonomy/taxonomy--place_type';
 import { getPrioritizedStaticPathsFromContext } from '../lib/get-prioritized-static-paths';
 import { GetStaticPathsContext } from 'next/types';
+import {MediaFotobook} from "../components/media--fotobook";
 
 // List of all the entity types handled by this route.
 export const ENTITY_TYPES = [
@@ -27,6 +28,7 @@ export const ENTITY_TYPES = [
   'node--event',
   'node--person',
   'node--place',
+  'media--fotoboek',
   'taxonomy_term--article_type',
   'taxonomy_term--event_type',
   'taxonomy_term--person_type',
@@ -61,6 +63,9 @@ export default function EntityPage({
       )}
       {entity.type === 'node--place' && (
         <NodePlace node={entity as DrupalNode} />
+      )}
+      {entity.type === 'media--fotoboek' && (
+        <MediaFotobook media={entity as DrupalNode} />
       )}
       {entity.type === 'taxonomy_term--article_type' && (
         <TaxonomyArticle
@@ -169,6 +174,10 @@ export async function getStaticProps(
 
   if (type === 'node--place') {
     params.addInclude(['field_place_image.image']);
+  }
+
+  if (type === 'media--fotoboek') {
+    params.addInclude(['field_media_image']);
   }
 
   const entity = await drupal.getResourceFromContext<
