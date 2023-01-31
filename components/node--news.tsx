@@ -91,7 +91,7 @@ function ClipPath() {
   )
 }
 
-export function NodeCardSmall({node, ...props}) {
+export function NodeCardSmall({node, size, ...props}) {
   return (
     <article className="relative mt-[90px]  rounded-lg bg-secondary-10 md:mt-0 md:ml-[80px]" {...props}>
       <Link href={node.path.alias} passHref className="grid grid-cols-1">
