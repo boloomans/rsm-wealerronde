@@ -6,13 +6,13 @@ import React from 'react';
 export function NodePerson({ node, ...props }) {
   return (
     <article className="relative mt-[90px]  rounded-lg bg-secondary-10 lg:mt-0 lg:ml-[80px]" {...props}>
-      <Link href={node.path.alias} passHref className="grid grid-cols-1">
-        {node.field_news_image && (
+      <div className="grid grid-cols-1">
+        {node.field_person_image && (
           <div className="block overflow-hidden object-fill shieldMask absolute top-[-90px] left-1/2 translate-x-[-50%]  aspect-{95 / 122} w-3/5 lg:w-2/6 lg:left-[-17%] lg:translate-x-[0] lg:top-0 max-h-full">
             <ClipPath></ClipPath>
             <div className="absolute top-0 h-full w-full">
               <MediaImage className="absolute h-full w-full"
-                          media={node.field_news_image}
+                          media={node.field_person_image}
                           priority
                           fill
                           imageStyle="coh_small_square"
@@ -27,7 +27,7 @@ export function NodePerson({ node, ...props }) {
           </div>
         )}
         <div className="relative px-5 pt-14 pb-10 md:pt-60 lg:pl-32 lg:pr-14 lg:pt-8">
-          <h2 className="mb-3 break-keep font-body text-lg font-bold leading-6 text-secondary-900 line-clamp-3 md:text-[22px] md:line-clamp-none">{node.title}</h2>
+          <h2 className="mb-3 break-keep font-body text-lg font-bold leading-6 text-secondary-900 line-clamp-3 md:text-[22px] md:line-clamp-none">{node.name}</h2>
           {node.body?.summary && (
             <p className="break-keep font-body text-sm leading-5 text-black-900 line-clamp-3 md:text-lg md:leading-8" data-cy="summary">
               {node.body.summary}
@@ -36,7 +36,7 @@ export function NodePerson({ node, ...props }) {
         </div>
 
 
-      </Link>
+      </div>
     </article>
   );
 }

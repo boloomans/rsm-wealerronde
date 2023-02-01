@@ -9,6 +9,7 @@ import SwiperCore, { Autoplay } from 'swiper';
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import { DrupalNode } from 'next-drupal';
+import { height } from 'dom7';
 
 
 interface Sponsorsprops {
@@ -92,11 +93,10 @@ function SponsorSwiper({sponsors, ...props}) {
   return (
     <div  {...props}>
       {sponsors?.length ? (
-        <Swiper
+        <Swiper className="h-[120px]"
           modules={[ Autoplay ]}
           spaceBetween={40}
           slidesPerView={5}
-          height={200}
           autoplay={{
             delay: 5000
           }}
