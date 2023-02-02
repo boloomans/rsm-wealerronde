@@ -1,19 +1,19 @@
 import React from 'react';
-import useDarkMode from 'use-dark-mode';
-import Toggle from 'react-toggle'
+// import useDarkMode from 'use-dark-mode';
+// import Toggle from 'react-toggle'
 
 const DarkModeToggle = () => {
   // const darkMode = useDarkMode();
 
   return (
     <div className="flex gap-2">
-      {/*<button type="button" onClick={darkMode.disable}>*/}
+      {/*<buttonPrimary.tsx type="buttonPrimary.tsx" onClick={darkMode.disable}>*/}
       {/*  ☀*/}
-      {/*</button>*/}
+      {/*</buttonPrimary.tsx>*/}
       {/*<Toggle checked={darkMode.value} onChange={darkMode.toggle} />*/}
-      {/*<button type="button" onClick={darkMode.enable}>*/}
+      {/*<buttonPrimary.tsx type="buttonPrimary.tsx" onClick={darkMode.enable}>*/}
       {/*  🌑*/}
-      {/*</button>*/}
+      {/*</buttonPrimary.tsx>*/}
     </div>
   );
 };

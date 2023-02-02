@@ -225,7 +225,7 @@ export async function getStaticProps(
           'path',
           'body',
         ])
-        .addFields('node--place', ['title', 'path'])
+        .addFields('node--person', ['title', 'path'])
         .addPageLimit(3)
         .getQueryObject(),
     },

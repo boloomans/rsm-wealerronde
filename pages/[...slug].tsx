@@ -47,6 +47,7 @@ export default function EntityPage({
   additionalContent,
   menus,
 }: EntityPageProps) {
+  console.log(entity);
   return (
     <Layout title={entity.title || entity.name} menus={menus}>
       {entity.type === 'node--page' && (

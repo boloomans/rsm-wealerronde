@@ -15,6 +15,7 @@ import React from "react";
 import { MediaFotobookTeaser } from "../components/media--fotobook";
 import { PageHeader } from '../components/page-header';
 import { NodeSponsorTeaser } from '../components/node--sponsors';
+import { NodePopup } from '../components/node--popup';
 
 interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
@@ -29,6 +30,9 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
   console.log(fotoBooks);
   return (
     <Layout title="Home" menus={menus}>
+
+
+
       <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
@@ -41,6 +45,8 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
               </TabList>
 
               <TabPanel>
+                <NodePopup/>
+
                 <div className="container mx-auto mt-12 pb-10">
                   {news?.length ? (
                     <div className="grid gap-4 lg:gap-14" data-cy="featured-news">
@@ -48,6 +54,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                         <NodeCardBig
                           key={news.id}
                           node={news}
+                          color="primary-10"
                         />
                       ))}
                       <div className="grid grid-cols-2 gap-2">
@@ -156,7 +163,6 @@ export async function getStaticProps(
           'field_news_date',
           'field_news_image',
         ])
-        .addFields('node--place', ['title', 'path'])
         .addPageLimit(3)
         .getQueryObject(),
     },

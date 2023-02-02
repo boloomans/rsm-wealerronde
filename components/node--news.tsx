@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import { MediaImage } from 'components/media--image';
-import { Button } from '../ThemeConfig';
-import { BiChevronRight } from 'react-icons/bi';
 import React from 'react';
 import {formatDate} from "../lib/format-date";
 import {FormattedText} from "./formatted-text";
 import BackButton from "./backButton";
 import {BlockBanner} from "./block--banner";
+import { ClipPath } from './shieldMask/shieldMask';
+import  { Button } from '../ThemeConfig';
+import { BiChevronRight } from 'react-icons/bi';
+
 
 
 export function NodeNews({node, ...props}) {
@@ -45,9 +47,15 @@ export function NodeNews({node, ...props}) {
   );
 }
 
-export function NodeCardBig({ node, ...props }) {
+// relative rounded-lg bg-secondary-10
+
+export function NodeCardBig({
+                              node,
+                              color,
+                              ...props
+    }) {
     return (
-        <article className="rounded-lg bg-secondary-10" {...props}>
+        <article className= {"relative rounded-lg bg-${this.color? color}"} {...props}>
             <Link href={node.path.alias} passHref className="grid lg:grid-cols-2">
                 {node.field_news_image && (
                   <div className="block overflow-hidden object-fill no-underline rounded-t-lg lg:rounded-l-lg lg:rounded-tr-[0]">
@@ -66,10 +74,9 @@ export function NodeCardBig({ node, ...props }) {
                             {node.body.summary}
                         </p>
                     )}
-
-                  <CardButton small={false}/>
                 </div>
 
+              <CardButton/>
 
             </Link>
         </article>
@@ -116,40 +123,13 @@ export function NodeCardSmall({ node, size, ...props }) {
     );
 }
 
-// function Text({ text, node, ...props}) {
-//   return(
-//     <div className="relative px-5 pt-7 pb-10 md:px-20 md:pt-8" {...props}>
-//       <h2 className="mb-2  font-body text-lg font-bold text-secondary-900 md:text-xl">{node.title}</h2>
-//       {node.body?.summary && (
-//         <p className="break-keep font-body text-sm leading-5 text-black-900 line-clamp-3 md:text-lg md:leading-8 md:line-clamp-5" data-cy="summary">
-//           {node.body.summary}
-//         </p>
-//       )}
-//
-//       <CardButton/>
-//
-//     </div>
-//   )
-// }
 
-function CardButton(
-  small
-) {
+function CardButton(small) {
   return(
-      <Button className={small ? 'absolute grid-cols-1 rounded-full bg-secondary-900 right-1/2 translate-x-[50%] -bottom-6 lg:right-3 lg:translate-x-[0%]' : 'absolute grid-cols-1 rounded-full bg-secondary-900 right-3 -bottom-6 translate-x-[0%]'}>
+      <Button className={small == true ? 'absolute right-1/2 -bottom-6 translate-x-[50%] grid-cols-1 rounded-full bg-secondary-900 lg:right-3 lg:translate-x-[0%]' : 'absolute right-3 -bottom-6 translate-x-[0%] grid-cols-1 rounded-full bg-secondary-900'}>
         <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
       </Button>
     )
 }
 
-function ClipPath() {
-  return(
-    <svg version="1.1" id="Layer_1" width="100%" height="100%" viewBox="0 0 93.31 120">
-      <defs>
-        <clipPath id="mask" clipPathUnits="objectBoundingBox">
-          <path id="download" d="m0.015,0.037 c0.331,-0.051,0.661,-0.05,0.994,0.007 v0.034 c0,0.158,0.003,0.317,0,0.475 c-0.003,0.169,-0.105,0.293,-0.301,0.368 c-0.06,0.023,-0.117,0.051,-0.177,0.075 c-0.01,0.004,-0.029,0.006,-0.037,0.002 c-0.091,-0.043,-0.186,-0.083,-0.272,-0.132 C0.086,0.791,0.017,0.684,0.013,0.555 c-0.005,-0.168,-0.001,-0.335,-0.001,-0.504 c0,-0.004,0.002,-0.01,0.003,-0.015"/>
-        </clipPath>
-      </defs>
-    </svg>
-  )
-}
+

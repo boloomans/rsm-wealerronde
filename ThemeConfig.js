@@ -23,7 +23,7 @@ export const Button = styled.button`
   color: ${props => props.primary ? "primary" : "white"};
 
   font-size: 1em;
-  border-radius: 50%; 
+  border-radius: 50%;
 `;
 
 
@@ -38,5 +38,11 @@ export const GlobalStyles = createGlobalStyle`
   
   .swiper-wrapper {
     align-items: center;
+    }
+    
+  .popup-content {
+    margin: 0 !important;
+    width: 100% !important;
+    }
 `
 
