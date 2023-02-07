@@ -41,8 +41,15 @@ export const GlobalStyles = createGlobalStyle`
     }
     
   .popup-content {
-    margin: 0 !important;
     width: 100% !important;
+    height: 100%;
+    justify-content: center;
+
+    @media (min-width: 1024px) {
+    height: auto;
+    width: auto !important;
+    }
+
     }
 `
 

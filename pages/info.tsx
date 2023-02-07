@@ -9,14 +9,16 @@ import { ENTITY_TYPES } from './[...slug]';
 import React from "react";
 import { NodePerson} from '../components/node--person';
 import { NodeCardBig } from '../components/node--news';
+import { BlockBanner } from '../components/block--banner';
 
 
 interface InfoPageProps extends LayoutProps {
   persons: DrupalNode[];
   news: DrupalNode[];
+  banners?: DrupalNode[];
 }
 
-export default function IndexPage({ menus, news, persons }: InfoPageProps) {
+export default function IndexPage({ menus, news, persons, banners }: InfoPageProps) {
   console.log(persons);
   return (
     <Layout title="Informatie" menus={menus}>
@@ -53,6 +55,15 @@ export default function IndexPage({ menus, news, persons }: InfoPageProps) {
             ) : (
               <p>Geen resultaten gevonden.</p>
             )}
+
+            {banners?.field_banner.length ? (
+              <div className="container relative mx-auto my-12 flex flex-col px-4 sm:items-center">
+                {banners.field_banner.slice(0, 2).map((banner) => (
+                  <BlockBanner key={banner.id} banner={banner}/>
+                ))}
+              </div>
+            ) : ''}
+
           </div>
         </section>
       </div>
@@ -105,11 +116,27 @@ export async function getStaticProps(
         .getQueryObject(),
     },
   );
+  const banners = await drupal.getResourceCollectionFromContext<DrupalFile[]>(
+    'block--banner',
+    context,
+    {
+      params: new DrupalJsonApiParams()
+        .addFilter('status', '1')
+        .addSort('title', 'DESC')
+        .addFields('block--banner', [
+          'id',
+          'field_banner',
+        ])
+        .addPageLimit(1)
+        .getQueryObject(),
+    },
+  );
   return {
     props: {
       menus: await getMenus(context),
       persons,
       news,
+      banners,
     },
     revalidate: 60,
   };

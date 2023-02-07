@@ -34,7 +34,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
 
 
       <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
-      <div className="mt-12 lg:mt-32">
+      <div className="mt-10 lg:mt-32">
         <section className="container mx-auto px-6">
           <div className="w-full">
             <Tabs>
@@ -45,9 +45,9 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
               </TabList>
 
               <TabPanel>
-                <NodePopup/>
-
                 <div className="container mx-auto mt-12 pb-10">
+                  <NodePopup/>
+
                   {news?.length ? (
                     <div className="grid gap-4 lg:gap-14" data-cy="featured-news">
                       {news.slice(0, 1).map((news) => (
