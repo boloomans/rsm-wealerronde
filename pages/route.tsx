@@ -35,78 +35,64 @@ import {ENTITY_TYPES} from "./[...slug]";
 import {drupal} from "../lib/drupal";
 import {DrupalJsonApiParams} from "drupal-jsonapi-params";
 import {getMenus} from "../lib/get-menus";
-import Icon = google.maps.Icon;
+import LatLng = google.maps.LatLng;
+import {PageHeader} from "../components/page-header";
+import {GiKnifeFork} from "react-icons/gi";
+import {MdLocationOn} from "react-icons/md";
 
 interface RoutePageProps extends LayoutProps {
-  places: DrupalNode[];
+  locations: DrupalNode[];
 }
 
 
-export default function RoutePage({menus, places}: RoutePageProps) {
+export default function RoutePage({menus, locations}: RoutePageProps) {
   const [lat, setLat] = useState(50.849322);
   const [lng, setLng] = useState(5.691917);
 
   const libraries = useMemo(() => ['places'], []);
   const mapCenter = useMemo(() => ({lat: lat, lng: lng}), [lat, lng]);
 
-  const icon: JSX.Element = (
-    <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 93.31 120">
-      test
-      <path id="download"
-            d="m.4,4.44C31.34-1.64,62.11-1.59,93.21,5.28v4.09c0,18.98.26,38.02-.05,57-.31,20.34-9.75,35.08-28.11,44.1-5.61,2.78-10.91,6.13-16.46,9.02-.94.52-2.67.73-3.51.21-8.55-5.14-17.36-9.96-25.43-15.78C7.01,94.89.61,82,.24,66.58-.23,46.5.14,26.36.14,6.23c.05-.52.16-1.15.26-1.78Z"/>
-    </svg>
-  )
-
   const mapOptions = useMemo<google.maps.MapOptions>(
     () => ({
       disableDefaultUI: true,
       clickableIcons: true,
       scrollwheel: false,
+      mapId: 'ac5af17b7ff78a0',
     }),
     []
   );
-
-  const locations = [
-    {lat: 50.84867750000001, lng: 5.6892651}
-  ];
 
   const {isLoaded} = useLoadScript({
     googleMapsApiKey: process.env.NEXT_PUBLIC_GOOGLE_MAPS_KEY as string,
     libraries: libraries as any,
   });
 
+  //TODO: Fix loading state of map
   if (!isLoaded) {
     return <p>Loading...</p>;
   }
 
-  function addMarker(e: any) {
-    console.log(e);
-    // const newPlace = { id: this.state.places.length, lat: e.latLng.lat(), lng: e.latLng.lng() };
-    // this.setState({
-    //   places: [...this.state.places,newPlace]
-    // })
-  }
+  console.log(locations);
 
   return (
     <Layout title="Home" menus={menus}>
-      <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
           <div className="w-full">
             <div className={styles.homeWrapper}>
-              <div className={styles.sidebar}>
-                {/* render Places Auto Complete and pass custom handler which updates the state */}
-                <PlacesAutocomplete
-                  onAddressSelect={(address) => {
-                    getGeocode({address: address}).then((results) => {
-                      const {lat, lng} = getLatLng(results[0]);
+              {/*<div className={styles.sidebar}>*/}
+              {/*  /!* render Places Auto Complete and pass custom handler which updates the state *!/*/}
+              {/*  <PlacesAutocomplete*/}
+              {/*    onAddressSelect={(address) => {*/}
+              {/*      getGeocode({address: address}).then((results) => {*/}
+              {/*        const {lat, lng} = getLatLng(results[0]);*/}
 
-                      setLat(lat);
-                      setLng(lng);
-                    });
-                  }}
-                />
-              </div>
+              {/*        setLat(lat);*/}
+              {/*        setLng(lng);*/}
+              {/*      });*/}
+              {/*    }}*/}
+              {/*  />*/}
+              {/*</div>*/}
               <GoogleMap
                 options={mapOptions}
                 zoom={17}
@@ -114,15 +100,9 @@ export default function RoutePage({menus, places}: RoutePageProps) {
                 mapTypeId={google.maps.MapTypeId.ROADMAP}
                 mapContainerStyle={{width: '800px', height: '800px'}}
                 onLoad={(map) => console.log('Map Loaded')}
-                onClick={addMarker.bind(this)}
               >
-                <MarkerF
-                  position={mapCenter}
-                  onLoad={() => console.log('Marker Loaded')}
-                />
-
-                {locations.map((latLng, i) => (
-                  <MarkerF key={i} position={latLng}
+                {locations.filter(value => value.field_geofield).map((location, i) => (
+                  <MarkerF key={location.id} position={new google.maps.LatLng({lat: location.field_geofield.lat, lng: location.field_geofield.lon})}
                            icon={{
                              path:
                                "m.4,4.44C31.34-1.64,62.11-1.59,93.21,5.28v4.09c0,18.98.26,38.02-.05,57-.31,20.34-9.75,35.08-28.11,44.1-5.61,2.78-10.91,6.13-16.46,9.02-.94.52-2.67.73-3.51.21-8.55-5.14-17.36-9.96-25.43-15.78C7.01,94.89.61,82,.24,66.58-.23,46.5.14,26.36.14,6.23c.05-.52.16-1.15.26-1.78Z",
@@ -134,15 +114,29 @@ export default function RoutePage({menus, places}: RoutePageProps) {
                              labelOrigin: new google.maps.Point(45, 50),
                            }}
                            label={{
-                             text: "Start", // codepoint from https://fonts.google.com/icons
+                             text: (i + 1).toString(), // codepoint from https://fonts.google.com/icons
                              fontFamily: "PT Sans",
                              color: "#ffffff",
                              fontSize: "12px",
+                             fontWeight: "700",
                            }}
                   />
                 ))}
               </GoogleMap>
             </div>
+          </div>
+          <div className="my-6">
+            <PageHeader heading="Onze Sponsoren" text="List of latest articles."
+                        className="text-blue-900"/>
+            {locations.filter(value => value.field_geofield).map((location, i) => (
+              // <MarkerF key={location.id} position={new google.maps.LatLng({lat: location.field_geofield.lat, lng: location.field_geofield.lon})}/>
+              <div key={location.id} className="rounded-lg bg-blue-900/20 p-5">
+                <h2 className="mb-2 font-title text-lg font-bold text-blue-900 md:text-[22px] lg:text-xl">{(i + 1).toString() + ". " + location.title}</h2>
+                <span className="flex"><GiKnifeFork className="text-xl text-blue-900"/>{location.field_sponsor_type.name}</span>
+                <span className="flex"><MdLocationOn className="text-xl text-blue-900"/> {location.field_sponsor_address.address_line1}, {location.field_sponsor_address.locality}</span>
+              </div>
+
+            ))}
           </div>
         </section>
       </div>
@@ -213,27 +207,31 @@ export async function getStaticProps(
   if (process.env.NODE_ENV == 'development') {
     await testApiCompatibility(ENTITY_TYPES, drupal);
   }
-  const places = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    'node--place',
+  const locations = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    'node--sponsoren',
     context,
     {
       params: new DrupalJsonApiParams()
         .addFilter('status', '1')
-        .addFields('node--place', [
+        .addInclude(['field_logo.image', 'field_sponsor_type'])
+        .addFields('node--sponsoren', [
           'id',
           'title',
           'path',
-          'body',
+          'field_geofield',
+          'field_sponsor_address',
+          'field_description',
+          'field_logo',
+          'field_website_link',
+          'field_sponsor_type',
         ])
-        .addFields('node--person', ['title', 'path'])
-        .addPageLimit(3)
         .getQueryObject(),
     },
   );
   return {
     props: {
       menus: await getMenus(context),
-      places,
+      locations,
     },
     revalidate: 60,
   };
