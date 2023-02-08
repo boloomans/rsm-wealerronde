@@ -94,8 +94,8 @@ export function NodeCardSmall({node, size, ...props}) {
           <div
             className="shieldMask absolute top-[-75px] left-1/2 block aspect-[95/122] max-h-full translate-x-[-50%] overflow-hidden object-fill md:top-[-90px] lg:left-[-17%] lg:top-0 lg:translate-x-[0]">
             <ClipPath></ClipPath>
-            <div className="absolute top-0 h-full w-full">
-              <MediaImage className="absolute h-full w-full"
+            <div>
+              <MediaImage
                           media={node.field_news_image}
                           priority
                           fill
@@ -110,7 +110,7 @@ export function NodeCardSmall({node, size, ...props}) {
             </div>
           </div>
         )}
-        <div className="relative px-5 pt-10 pb-10 min-[425px]:pt-20 min-[530px]:pt-28 min-[640px]:pt-40md:pt-60 lg:pl-32 lg:pr-14 lg:pt-8">
+        <div className="min-[640px]:pt-40md:pt-60 relative px-5 pt-10 pb-10 min-[425px]:pt-20 min-[530px]:pt-28 lg:pl-32 lg:pr-14 lg:pt-8">
           <h2
             className="mb-3 break-keep font-body text-lg font-bold leading-6 text-secondary-900 line-clamp-3 md:text-[22px] md:line-clamp-none">{node.title}</h2>
           {node.body?.summary && (

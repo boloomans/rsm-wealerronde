@@ -47,6 +47,42 @@ interface RoutePageProps extends LayoutProps {
 }
 
 
+function SponsorOverview({locations, ...props}){
+  return (
+    <div {...props}>
+      <PageHeader heading="Onze Sponsoren" text="List of latest articles."
+                  className="text-blue-900"/>
+      {locations.filter(value => value.field_geofield).map((location, i) => (
+        <div key={location.id} className="relative mt-7 rounded-b-lg bg-blue-900/20 p-5 pt-10">
+          <div className="flex gap-8">
+            {location.field_logo && (
+              <div className="shieldMask relative -top-16 max-w-[80px]">
+                <ClipPath></ClipPath>
+                <MediaImage media={location.field_logo}
+                            priority
+                            fill
+                            imageStyle="coh_small_square"
+                            imageStyling={{
+                              objectFit: "cover"
+                            }}
+                            mask={true}
+                            sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
+                />
+              </div>
+            )}
+            <div className="">
+              <h2 className="mb-2 font-title text-lg font-bold text-blue-900 md:text-[22px] lg:text-xl">{(i + 1).toString() + ". " + location.title}</h2>
+              <span className="flex items-center gap-2 font-body font-bold text-blue-900"><GiKnifeFork className="text-xl"/>{location.field_sponsor_type.name}</span>
+              <span className="flex items-center gap-2 font-body font-bold text-blue-900"><MdLocationOn className="text-xl"/> {location.field_sponsor_address.address_line1}, {location.field_sponsor_address.locality}</span>
+            </div>
+          </div>
+        </div>
+
+      ))}
+    </div>
+  )
+}
+
 export default function RoutePage({menus, locations}: RoutePageProps) {
   const [lat, setLat] = useState(50.849322);
   const [lng, setLng] = useState(5.691917);
@@ -74,33 +110,18 @@ export default function RoutePage({menus, locations}: RoutePageProps) {
     return <p>Loading...</p>;
   }
 
-  console.log(locations);
-
   return (
     <Layout title="Route" menus={menus}>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
           <div className="w-full">
             <div className={styles.homeWrapper}>
-              {/*<div className={styles.sidebar}>*/}
-              {/*  /!* render Places Auto Complete and pass custom handler which updates the state *!/*/}
-              {/*  <PlacesAutocomplete*/}
-              {/*    onAddressSelect={(address) => {*/}
-              {/*      getGeocode({address: address}).then((results) => {*/}
-              {/*        const {lat, lng} = getLatLng(results[0]);*/}
-
-              {/*        setLat(lat);*/}
-              {/*        setLng(lng);*/}
-              {/*      });*/}
-              {/*    }}*/}
-              {/*  />*/}
-              {/*</div>*/}
               <GoogleMap
                 options={mapOptions}
                 zoom={17}
                 center={mapCenter}
                 mapTypeId={google.maps.MapTypeId.ROADMAP}
-                mapContainerStyle={{width: '100%', height: '100%'}}
+                mapContainerStyle={{width: '600px', height: '700px'}}
                 onLoad={(map) => console.log('Map Loaded')}
               >
                 {locations.filter(value => value.field_geofield).map((location, i) => (
@@ -125,37 +146,24 @@ export default function RoutePage({menus, locations}: RoutePageProps) {
                   />
                 ))}
               </GoogleMap>
+              <div className={styles.sidebar}>
+                <SponsorOverview className="hidden lg:block" locations={locations}/>
+                {/* render Places Auto Complete and pass custom handler which updates the state */}
+                {/*<PlacesAutocomplete*/}
+                {/*  onAddressSelect={(address) => {*/}
+                {/*    getGeocode({address: address}).then((results) => {*/}
+                {/*      const {lat, lng} = getLatLng(results[0]);*/}
+
+                {/*      setLat(lat);*/}
+                {/*      setLng(lng);*/}
+                {/*    });*/}
+                {/*  }}*/}
+                {/*/>*/}
+              </div>
             </div>
           </div>
-          <div className="my-6">
-            <PageHeader heading="Onze Sponsoren" text="List of latest articles."
-                        className="text-blue-900"/>
-            {locations.filter(value => value.field_geofield).map((location, i) => (
-              <div key={location.id} className="relative mt-7 rounded-b-lg bg-blue-900/20 p-5 pt-10">
-                <div className="flex gap-8">
-                  {location.field_logo && (
-                    <div className="shieldMask relative -top-16 max-w-[80px]">
-                      <ClipPath></ClipPath>
-                      <MediaImage media={location.field_logo}
-                                  priority
-                                  fill
-                                  imageStyle="coh_small_square"
-                                  imageStyling={{
-                                    objectFit: "cover"
-                                  }}
-                        sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
-                      />
-                    </div>
-                  )}
-                  <div className="">
-                    <h2 className="mb-2 font-title text-lg font-bold text-blue-900 md:text-[22px] lg:text-xl">{(i + 1).toString() + ". " + location.title}</h2>
-                    <span className="flex items-center gap-2 font-body font-bold text-blue-900"><GiKnifeFork className="text-xl"/>{location.field_sponsor_type.name}</span>
-                    <span className="flex items-center gap-2 font-body font-bold text-blue-900"><MdLocationOn className="text-xl"/> {location.field_sponsor_address.address_line1}, {location.field_sponsor_address.locality}</span>
-                  </div>
-                </div>
-              </div>
-
-            ))}
+          <div className="my-6 block lg:hidden">
+            <SponsorOverview locations={locations}/>
           </div>
         </section>
       </div>

@@ -1,14 +1,11 @@
 .homeWrapper {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
 }
 
 .sidebar {
-    margin-right: 16px;
-    width: 20%;
-    height: 50vh;
-    background-color: #333;
+    height: 100%;
 }
 
 .autocompleteWrapper {
