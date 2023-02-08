@@ -92,22 +92,18 @@ export function NodeCardSmall({node, size, ...props}) {
       <Link href={node.path.alias} passHref className="grid grid-cols-1">
         {node.field_news_image && (
           <div
-            className="shieldMask absolute top-[-75px] left-1/2 block aspect-[95/122] max-h-full translate-x-[-50%] overflow-hidden object-fill md:top-[-90px] lg:left-[-17%] lg:top-0 lg:translate-x-[0]">
-            <ClipPath></ClipPath>
-            <div>
-              <MediaImage
+            className="absolute top-[-75px] left-1/2 block aspect-[95/122] max-h-full translate-x-[-50%] overflow-hidden md:top-[-90px] lg:left-[-17%] lg:top-0 lg:translate-x-[0]">
+
+          <MediaImage
                           media={node.field_news_image}
                           priority
                           fill
+                          mask={true}
                           imageStyle="coh_small_square"
-                          imageStyling={{
-                            objectFit: "cover"
-                          }}
                           sizes="(max-width: 768px) 100vw,
                                         (max-width: 1200px) 50vw,
                                         420px"
               />
-            </div>
           </div>
         )}
         <div className="min-[640px]:pt-40md:pt-60 relative px-5 pt-10 pb-10 min-[425px]:pt-20 min-[530px]:pt-28 lg:pl-32 lg:pr-14 lg:pt-8">

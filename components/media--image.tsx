@@ -1,13 +1,18 @@
-import Image, {ImageProps} from 'next/image';
-import {DrupalMedia} from 'next-drupal';
+import Image, { ImageProps } from 'next/image';
+import { DrupalMedia } from 'next-drupal';
 
-import {absoluteURL} from 'lib/absolute-url';
-import {CSSProperties} from "react";
+import { absoluteURL } from 'lib/absolute-url';
+import React, { CSSProperties } from "react";
+
+import { ClipPath } from './shieldMask/shieldMask';
+import classNames from 'classnames';
+
 
 interface MediaImageProps extends Partial<ImageProps> {
   media: DrupalMedia;
   imageStyle?: string;
   imageStyling?: CSSProperties;
+  mask?: boolean;
 }
 
 MediaImage.type = 'media--image';
@@ -25,6 +30,7 @@ export function MediaImage({
                              placeholder,
                              blurDataURL,
                              loading,
+                             mask = false,
                              ...props
                            }: MediaImageProps) {
   const image = media?.image;
@@ -65,8 +71,12 @@ export function MediaImage({
   }
 
   return (
-    // eslint-disable-next-line tailwindcss/no-custom-classname
-    <div className="media__content image__wrapper" {...props}>
+    <div className={classNames('media__content image__wrapper', {
+      'shieldMask relative': mask,
+    })} {...props}>
+      {mask &&
+        <ClipPath/>
+      }
       <Image
         src={srcURL}
         alt={image.resourceIdObjMeta.alt || 'Image'}
@@ -79,9 +89,10 @@ export function MediaImage({
         blurDataURL={blurDataURL}
         loading={loading}
         placeholder={placeholder}
-        style={imageStyling}
+        style={(mask ? ({imageStyling, objectFit: 'cover'}) : {imageStyling})}
         {...(!fill ? sizeProps : {})}
       />
     </div>
+
   );
 }

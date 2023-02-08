@@ -56,15 +56,11 @@ function SponsorOverview({locations, ...props}){
         <div key={location.id} className="relative mt-7 rounded-b-lg bg-blue-900/20 p-5 pt-10">
           <div className="flex gap-8">
             {location.field_logo && (
-              <div className="shieldMask relative -top-16 max-w-[80px]">
-                <ClipPath></ClipPath>
+              <div className="relative -top-16 max-w-[80px]">
                 <MediaImage media={location.field_logo}
                             priority
                             fill
                             imageStyle="coh_small_square"
-                            imageStyling={{
-                              objectFit: "cover"
-                            }}
                             mask={true}
                             sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
                 />
@@ -118,7 +114,7 @@ export default function RoutePage({menus, locations}: RoutePageProps) {
             <div className={styles.homeWrapper}>
               <GoogleMap
                 options={mapOptions}
-                zoom={17}
+                zoom={16.1}
                 center={mapCenter}
                 mapTypeId={google.maps.MapTypeId.ROADMAP}
                 mapContainerStyle={{width: '600px', height: '700px'}}
