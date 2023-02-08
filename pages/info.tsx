@@ -9,6 +9,7 @@ import { ENTITY_TYPES } from './[...slug]';
 import React from "react";
 import { NodePerson} from '../components/node--person';
 import { NodeCardBig } from '../components/node--news';
+import { BlockBanner } from '../components/block--banner';
 
 
 interface InfoPageProps extends LayoutProps {
@@ -17,7 +18,6 @@ interface InfoPageProps extends LayoutProps {
 }
 
 export default function IndexPage({ menus, news, persons }: InfoPageProps) {
-  console.log(persons);
   return (
     <Layout title="Informatie" menus={menus}>
       <div className="mt-12 lg:mt-32">
@@ -30,7 +30,7 @@ export default function IndexPage({ menus, news, persons }: InfoPageProps) {
                     <NodeCardBig
                       key={news.id}
                       node={news}
-                      color="primary"
+                      className="bg-primary-10 text-primary-900"
                     />
                   ))}
                 </div>
@@ -41,8 +41,8 @@ export default function IndexPage({ menus, news, persons }: InfoPageProps) {
 
 
             {persons?.length ? (
-              <div className="grid grid-cols-2 gap-4 lg:gap-14" data-cy="featured-persons">
-                {persons.slice(0, 1).map((person) => (
+              <div className="grid grid-cols-2 pb-6 gap-4 lg:gap-14" data-cy="featured-persons">
+                {persons.slice(0, 4).map((person) => (
                   <NodePerson
                     key={person.id}
                     person={person}
@@ -53,6 +53,9 @@ export default function IndexPage({ menus, news, persons }: InfoPageProps) {
             ) : (
               <p>Geen resultaten gevonden.</p>
             )}
+
+           {/*Blockbanner*/}
+
           </div>
         </section>
       </div>

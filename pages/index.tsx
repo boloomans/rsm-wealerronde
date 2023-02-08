@@ -30,7 +30,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
   return (
     <Layout title="Home" menus={menus}>
       <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
-      <div className="mt-12 lg:mt-32">
+      <div className="mt-10 lg:mt-32">
         <section className="container mx-auto px-6">
           <div className="w-full">
             <Tabs>
@@ -50,7 +50,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                         <NodeCardBig
                           key={news.id}
                           node={news}
-                          color="primary-10"
+                          className="bg-secondary-10 text-secondary-900"
                         />
                       ))}
                       <div className="grid grid-cols-2 gap-2">

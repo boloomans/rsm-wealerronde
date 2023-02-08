@@ -73,7 +73,7 @@ export function NodeSponsorTeaser({sponsors, ...props}: Sponsorsprops) {
 
   if(mQuery && !mQuery.matches){
     return (
-      <section className="mx-auto grid grid-cols-2 auto-rows-max place-items-center h-full gap-4 space-y-4 md:space-y-0" {...props}>
+      <section className="mx-auto grid grid-cols-2 auto-rows-max place-items-center h-full w-full gap-4 space-y-4 md:space-y-0" {...props}>
         {sponsors.map((sponsor) => (
           <SponsorLogo key={sponsor.id} logo={sponsor}/>
         ))}

@@ -8,6 +8,7 @@ import {BlockBanner} from "./block--banner";
 import { ClipPath } from './shieldMask/shieldMask';
 import  { Button } from '../ThemeConfig';
 import { BiChevronRight } from 'react-icons/bi';
+import classNames from 'classnames';
 
 
 
@@ -49,26 +50,25 @@ export function NodeNews({node, ...props}) {
 
 export function NodeCardBig({
                               node,
-                              color,
+                              className,
                               ...props
-                            }) {
-  return (
-    <article className={"relative rounded-lg bg-secondary-10"} {...props}>
-      <Link href={node.path.alias} passHref className="grid lg:grid-cols-2">
-        {node.field_news_image && (
-          <div
-            className="block overflow-hidden rounded-t-lg object-fill no-underline lg:rounded-l-lg lg:rounded-tr-[0]">
-            <MediaImage
-              media={node.field_news_image}
-              priority
-              sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
-            />
-          </div>
-        )}
+    }) {
+    return (
+        <article className={classNames("relative rounded-lg]", className)} {...props}>
+            <Link href={node.path.alias} passHref className="grid lg:grid-cols-2">
+                {node.field_news_image && (
+                  <div className="block overflow-hidden object-fill no-underline rounded-t-lg lg:rounded-l-lg lg:rounded-tr-[0]">
+                    <MediaImage
+                        media={node.field_news_image}
+                        priority
+                        sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
+                    />
+                  </div>
+                )}
 
         <div className="relative px-5 pt-7 pb-10 lg:px-20 lg:pt-8">
           <h2
-            className="mb-2 font-body text-lg font-bold text-secondary-900 md:text-[22px] lg:text-xl">{node.title}</h2>
+            className="mb-2 font-body text-lg font-bold md:text-[22px] lg:text-xl">{node.title}</h2>
           {node.body?.summary && (
             <p
               className="break-keep font-body text-sm leading-5 text-black-900 line-clamp-3 md:text-lg lg:text-lg lg:leading-8 lg:line-clamp-5"
