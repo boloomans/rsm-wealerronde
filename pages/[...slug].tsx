@@ -49,7 +49,7 @@ export default function EntityPage({
 }: EntityPageProps) {
   console.log(entity);
   return (
-    <Layout title={entity.title || entity.name} menus={menus}>
+    <Layout title={entity.title || entity.name} header={false} menus={menus}>
       {entity.type === 'node--page' && (
         <NodeBasicPage node={entity as DrupalNode} />
       )}
@@ -60,7 +60,7 @@ export default function EntityPage({
         <NodeEvent node={entity as DrupalNode} />
       )}
       {entity.type === 'node--person' && (
-        <NodePerson node={entity as DrupalNode} />
+        <NodePerson person={entity as DrupalNode} />
       )}
       {entity.type === 'node--place' && (
         <NodePlace node={entity as DrupalNode} />
