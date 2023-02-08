@@ -15,11 +15,9 @@ import { BlockBanner } from '../components/block--banner';
 interface InfoPageProps extends LayoutProps {
   persons: DrupalNode[];
   news: DrupalNode[];
-  banners?: DrupalNode[];
 }
 
-export default function IndexPage({ menus, news, persons, banners }: InfoPageProps) {
-  console.log(persons);
+export default function IndexPage({ menus, news, persons }: InfoPageProps) {
   return (
     <Layout title="Informatie" menus={menus}>
       <div className="mt-12 lg:mt-32">
@@ -32,7 +30,7 @@ export default function IndexPage({ menus, news, persons, banners }: InfoPagePro
                     <NodeCardBig
                       key={news.id}
                       node={news}
-                      color="primary"
+                      className="bg-primary-10 text-primary-900"
                     />
                   ))}
                 </div>
@@ -43,8 +41,8 @@ export default function IndexPage({ menus, news, persons, banners }: InfoPagePro
 
 
             {persons?.length ? (
-              <div className="grid grid-cols-2 gap-4 lg:gap-14" data-cy="featured-persons">
-                {persons.slice(0, 1).map((person) => (
+              <div className="grid grid-cols-2 pb-6 gap-4 lg:gap-14" data-cy="featured-persons">
+                {persons.slice(0, 4).map((person) => (
                   <NodePerson
                     key={person.id}
                     person={person}
@@ -56,13 +54,7 @@ export default function IndexPage({ menus, news, persons, banners }: InfoPagePro
               <p>Geen resultaten gevonden.</p>
             )}
 
-            {banners?.field_banner.length ? (
-              <div className="container relative mx-auto my-12 flex flex-col px-4 sm:items-center">
-                {banners.field_banner.slice(0, 2).map((banner) => (
-                  <BlockBanner key={banner.id} banner={banner}/>
-                ))}
-              </div>
-            ) : ''}
+           {/*Blockbanner*/}
 
           </div>
         </section>
@@ -116,27 +108,11 @@ export async function getStaticProps(
         .getQueryObject(),
     },
   );
-  const banners = await drupal.getResourceCollectionFromContext<DrupalFile[]>(
-    'block--banner',
-    context,
-    {
-      params: new DrupalJsonApiParams()
-        .addFilter('status', '1')
-        .addSort('title', 'DESC')
-        .addFields('block--banner', [
-          'id',
-          'field_banner',
-        ])
-        .addPageLimit(1)
-        .getQueryObject(),
-    },
-  );
   return {
     props: {
       menus: await getMenus(context),
       persons,
       news,
-      banners,
     },
     revalidate: 60,
   };

@@ -54,7 +54,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                         <NodeCardBig
                           key={news.id}
                           node={news}
-                          color="primary-10"
+                          className="bg-secondary-10 text-secondary-900"
                         />
                       ))}
                       <div className="grid grid-cols-2 gap-2">

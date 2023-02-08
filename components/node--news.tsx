@@ -8,6 +8,7 @@ import {BlockBanner} from "./block--banner";
 import { ClipPath } from './shieldMask/shieldMask';
 import  { Button } from '../ThemeConfig';
 import { BiChevronRight } from 'react-icons/bi';
+import classNames from 'classnames';
 
 
 
@@ -51,11 +52,11 @@ export function NodeNews({node, ...props}) {
 
 export function NodeCardBig({
                               node,
-                              color,
+                              className,
                               ...props
     }) {
     return (
-        <article className= {"relative rounded-lg bg-${this.color? color}"} {...props}>
+        <article className={classNames("relative rounded-lg]", className)} {...props}>
             <Link href={node.path.alias} passHref className="grid lg:grid-cols-2">
                 {node.field_news_image && (
                   <div className="block overflow-hidden object-fill no-underline rounded-t-lg lg:rounded-l-lg lg:rounded-tr-[0]">
@@ -68,7 +69,7 @@ export function NodeCardBig({
                 )}
 
                 <div className="relative px-5 pt-7 pb-10 lg:px-20 lg:pt-8">
-                    <h2 className="mb-2 font-body text-lg font-bold text-secondary-900 md:text-[22px] lg:text-xl">{node.title}</h2>
+                    <h2 className="mb-2 font-body text-lg font-bold md:text-[22px] lg:text-xl">{node.title}</h2>
                     {node.body?.summary && (
                         <p className="break-keep font-body text-sm md:text-lg leading-5 text-black-900 line-clamp-3 lg:text-lg lg:leading-8 lg:line-clamp-5" data-cy="summary">
                             {node.body.summary}
@@ -126,7 +127,7 @@ export function NodeCardSmall({ node, size, ...props }) {
 
 function CardButton(small) {
   return(
-      <Button className={small == true ? 'absolute right-1/2 -bottom-6 translate-x-[50%] grid-cols-1 rounded-full bg-secondary-900 lg:right-3 lg:translate-x-[0%]' : 'absolute right-3 -bottom-6 translate-x-[0%] grid-cols-1 rounded-full bg-secondary-900'}>
+      <Button className={classNames(small == true ? 'absolute right-1/2 -bottom-6 translate-x-[50%] grid-cols-1 rounded-full bg-secondary-900 lg:right-3 lg:translate-x-[0%]' : 'absolute right-3 -bottom-6 translate-x-[0%] grid-cols-1 rounded-full bg-secondary-900')}>
         <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
       </Button>
     )
