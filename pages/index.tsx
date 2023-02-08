@@ -27,12 +27,8 @@ interface IndexPageProps extends LayoutProps {
 }
 
 export default function IndexPage({ menus, news, events, banners, fotoBooks, places, sponsors }: IndexPageProps) {
-  console.log(fotoBooks);
   return (
     <Layout title="Home" menus={menus}>
-
-
-
       <BlockHero heading={"Ben jij klaar voor de start?"}></BlockHero>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
@@ -45,7 +41,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
               </TabList>
 
               <TabPanel>
-                <NodePopup/>
+                {/*<NodePopup/>*/}
 
                 <div className="container mx-auto mt-12 pb-10">
                   {news?.length ? (
@@ -88,10 +84,6 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                     <p>Geen resultaten gevonden.</p>
                   )}
                 </div>
-
-
-
-
               </TabPanel>
               <TabPanel>
                 <div className="container mx-auto pb-10">

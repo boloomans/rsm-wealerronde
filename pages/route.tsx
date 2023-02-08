@@ -39,6 +39,8 @@ import LatLng = google.maps.LatLng;
 import {PageHeader} from "../components/page-header";
 import {GiKnifeFork} from "react-icons/gi";
 import {MdLocationOn} from "react-icons/md";
+import {MediaImage} from "../components/media--image";
+import {ClipPath} from "../components/shieldMask/shieldMask";
 
 interface RoutePageProps extends LayoutProps {
   locations: DrupalNode[];
@@ -75,7 +77,7 @@ export default function RoutePage({menus, locations}: RoutePageProps) {
   console.log(locations);
 
   return (
-    <Layout title="Home" menus={menus}>
+    <Layout title="Route" menus={menus}>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
           <div className="w-full">
@@ -98,7 +100,7 @@ export default function RoutePage({menus, locations}: RoutePageProps) {
                 zoom={17}
                 center={mapCenter}
                 mapTypeId={google.maps.MapTypeId.ROADMAP}
-                mapContainerStyle={{width: '800px', height: '800px'}}
+                mapContainerStyle={{width: '100%', height: '100%'}}
                 onLoad={(map) => console.log('Map Loaded')}
               >
                 {locations.filter(value => value.field_geofield).map((location, i) => (
@@ -129,11 +131,28 @@ export default function RoutePage({menus, locations}: RoutePageProps) {
             <PageHeader heading="Onze Sponsoren" text="List of latest articles."
                         className="text-blue-900"/>
             {locations.filter(value => value.field_geofield).map((location, i) => (
-              // <MarkerF key={location.id} position={new google.maps.LatLng({lat: location.field_geofield.lat, lng: location.field_geofield.lon})}/>
-              <div key={location.id} className="rounded-lg bg-blue-900/20 p-5">
-                <h2 className="mb-2 font-title text-lg font-bold text-blue-900 md:text-[22px] lg:text-xl">{(i + 1).toString() + ". " + location.title}</h2>
-                <span className="flex"><GiKnifeFork className="text-xl text-blue-900"/>{location.field_sponsor_type.name}</span>
-                <span className="flex"><MdLocationOn className="text-xl text-blue-900"/> {location.field_sponsor_address.address_line1}, {location.field_sponsor_address.locality}</span>
+              <div key={location.id} className="relative mt-7 rounded-b-lg bg-blue-900/20 p-5 pt-10">
+                <div className="flex gap-8">
+                  {location.field_logo && (
+                    <div className="shieldMask relative -top-16 max-w-[80px]">
+                      <ClipPath></ClipPath>
+                      <MediaImage media={location.field_logo}
+                                  priority
+                                  fill
+                                  imageStyle="coh_small_square"
+                                  imageStyling={{
+                                    objectFit: "cover"
+                                  }}
+                        sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
+                      />
+                    </div>
+                  )}
+                  <div className="">
+                    <h2 className="mb-2 font-title text-lg font-bold text-blue-900 md:text-[22px] lg:text-xl">{(i + 1).toString() + ". " + location.title}</h2>
+                    <span className="flex items-center gap-2 font-body font-bold text-blue-900"><GiKnifeFork className="text-xl"/>{location.field_sponsor_type.name}</span>
+                    <span className="flex items-center gap-2 font-body font-bold text-blue-900"><MdLocationOn className="text-xl"/> {location.field_sponsor_address.address_line1}, {location.field_sponsor_address.locality}</span>
+                  </div>
+                </div>
               </div>
 
             ))}

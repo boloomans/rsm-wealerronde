@@ -9,9 +9,11 @@ import { MenuFooter } from 'components/menu--footer';
 import React, {useEffect, useRef, useState} from "react";
 import {FaBell} from "react-icons/fa";
 import {BlockHero} from "./block--hero";
+import {bool} from "yup";
 
 export interface LayoutProps {
   title?: string;
+  header?: boolean;
   children?: React.ReactNode;
   menus: {
     main: DrupalMenuLinkContent[];
@@ -20,7 +22,7 @@ export interface LayoutProps {
   banners?,
 }
 
-export function Layout({ title, menus, banners, children }: LayoutProps) {
+export function Layout({ title, header = true, menus, banners, children }: LayoutProps) {
   return (
     <>
       <Head>
@@ -28,17 +30,19 @@ export function Layout({ title, menus, banners, children }: LayoutProps) {
       </Head>
       <PreviewAlert />
       <div className="relative flex min-h-screen flex-col">
-        <header className={`navbar sticky-custom z-50 w-full`}>
-          <div className="container mx-auto flex flex-row items-center justify-between px-6 py-4">
-            <Link className="flex items-center space-x-2 no-underline" href="/" passHref>
-              <div className="">
-                <Image src="/logo.png" alt="Logo" width={83} height={33} />
-              </div>
-            </Link>
-            <FaBell className="text-2xl text-primary-900"></FaBell>
-            {menus?.main && <MenuMain menu={menus.main} />}
-          </div>
-        </header>
+        {header &&
+          <header className={`navbar sticky-custom z-50 w-full`}>
+            <div className="container mx-auto flex flex-row items-center justify-between px-6 py-4">
+              <Link className="flex items-center space-x-2 no-underline" href="/" passHref>
+                <div className="">
+                  <Image src="/logo.png" alt="Logo" width={83} height={33}/>
+                </div>
+              </Link>
+              <FaBell className="text-2xl text-primary-900"></FaBell>
+              {menus?.main && <MenuMain menu={menus.main}/>}
+            </div>
+          </header>
+        }
         <main className="flex-1">
           {children}
         </main>

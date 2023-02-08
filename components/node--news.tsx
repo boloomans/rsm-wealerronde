@@ -47,9 +47,13 @@ export function NodeNews({node, ...props}) {
   );
 }
 
-// relative rounded-lg bg-secondary-10export function NodeCardBig({node,color, ...props}) {
+export function NodeCardBig({
+                              node,
+                              color,
+                              ...props
+                            }) {
   return (
-    <article className={"relative rounded-lg bg-${this.color? color}"} {...props}>
+    <article className={"relative rounded-lg bg-secondary-10"} {...props}>
       <Link href={node.path.alias} passHref className="grid lg:grid-cols-2">
         {node.field_news_image && (
           <div
@@ -88,7 +92,7 @@ export function NodeCardSmall({node, size, ...props}) {
       <Link href={node.path.alias} passHref className="grid grid-cols-1">
         {node.field_news_image && (
           <div
-            className="block overflow-hidden object-fill shieldMask absolute top-[-75px] md:top-[-90px] left-1/2 translate-x-[-50%] lg:left-[-17%] lg:translate-x-[0] lg:top-0 aspect-[95/122] max-h-full">
+            className="shieldMask absolute top-[-75px] left-1/2 block aspect-[95/122] max-h-full translate-x-[-50%] overflow-hidden object-fill md:top-[-90px] lg:left-[-17%] lg:top-0 lg:translate-x-[0]">
             <ClipPath></ClipPath>
             <div className="absolute top-0 h-full w-full">
               <MediaImage className="absolute h-full w-full"
@@ -116,7 +120,7 @@ export function NodeCardSmall({node, size, ...props}) {
             </p>
           )}
         </div>
-        <CardButtonsmall={true}/>
+        <CardButton small={true}/>
 
       </Link>
     </article>
