@@ -6,6 +6,7 @@ import React, { CSSProperties } from "react";
 
 import { ClipPath } from './shieldMask/shieldMask';
 import classNames from 'classnames';
+import { className } from 'postcss-selector-parser';
 
 
 interface MediaImageProps extends Partial<ImageProps> {
@@ -19,6 +20,7 @@ MediaImage.type = 'media--image';
 
 export function MediaImage({
                              media,
+                             className,
                              imageStyle,
                              imageStyling,
                              fill = false,
@@ -73,7 +75,7 @@ export function MediaImage({
   return (
     <div className={classNames('media__content image__wrapper', {
       'shieldMask': mask,
-    })} {...props}>
+    }, className)} {...props}>
       {mask &&
         <ClipPath/>
       }

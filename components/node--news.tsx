@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import {MediaImage} from 'components/media--image';
-import React from 'react';
+import React, { CSSProperties } from 'react';
 import {formatDate} from "../lib/format-date";
 import {FormattedText} from "./formatted-text";
 import BackButton from "./backButton";
@@ -8,8 +8,6 @@ import {BlockBanner} from "./block--banner";
 import  { Button } from '../ThemeConfig';
 import { BiChevronRight } from 'react-icons/bi';
 import classNames from 'classnames';
-
-
 
 export function NodeNews({node, ...props}) {
   return (
@@ -76,13 +74,9 @@ export function NodeCardBig({
                       {node.body.summary}
                     </p>
                   )}
-                  <CardButton/>
                 </div>
               </div>
-
-
-
-
+              <CardButton/>
       </Link>
     </article>
   );
@@ -90,12 +84,12 @@ export function NodeCardBig({
 
 export function NodeCardSmall({node, size, ...props}) {
   return (
-    <article className="relative rounded-lg bg-secondary-10 h-full lg:h-5/6" {...props}>
-      <Link href={node.path.alias} passHref>
-        <div className="flex flex-col lg:h-full lg:flex-row">
+    <article className="relative rounded-lg bg-secondary-10 lg:h-5/6 mt-36 lg:mt-0 lg:ml-[100px]" {...props}>
+      <Link href={node.path.alias} passHref className="flex flex-wrap lg:flex-nowrap justify-between h-full flex-col">
+        <div className="flex flex-col lg:h-full lg:flex-row -mt-36 lg:mt-0 lg:pb-0">
           {node.field_news_image && (
                 <div
-                  className="relative aspect-[95/122] w-5/6 self-center">
+                  className="relative w-5/6 self-center max-w-[125px] lg:max-w-[200px] lg:-ml-[100px]">
 
                 <MediaImage
                                 media={node.field_news_image}
@@ -103,9 +97,6 @@ export function NodeCardSmall({node, size, ...props}) {
                                 fill
                                 mask={true}
                                 imageStyle="coh_small_square"
-                                sizes="(max-width: 768px) 100vw,
-                                              (max-width: 1200px) 50vw,
-                                              420px"
                     />
                 </div>
               )}
@@ -119,19 +110,18 @@ export function NodeCardSmall({node, size, ...props}) {
                   </p>
                 )}
             </div>
-          </div>
-
-        <CardButton small={true}/>
-
+        </div>
+        <CardButton small/>
       </Link>
     </article>
   );
 }
 
 
-function CardButton(small) {
+function CardButton({small = false}) {
+  console.log(small)
   return (
-    <div className={small == true ? 'absolute right-4 -bottom-6' : 'absolute right-4 -bottom-6'}>
+    <div className={classNames('relative flex justify-end -mb-6 lg:-mt-6 lg:mb-0 lg:mr-4', {'justify-center lg:justify-end': small})}>
       <Button className='rounded-full bg-secondary-900'>
         <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
       </Button>
