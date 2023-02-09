@@ -53,7 +53,7 @@ function SponsorOverview({locations, ...props}){
       <PageHeader heading="Onze Sponsoren" text="List of latest articles."
                   className="text-blue-900"/>
       {locations.filter(value => value.field_geofield).map((location, i) => (
-        <div key={location.id} className="relative mt-7 rounded-b-lg bg-blue-900/20 p-5 pt-10">
+        <div key={location.id} className="relative mt-7 rounded-b-lg bg-blue-900/20 p-5 pt-10 pb-0">
           <div className="flex gap-8">
             {location.field_logo && (
               <div className="relative -top-16 max-w-[80px]">
