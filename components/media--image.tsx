@@ -72,7 +72,7 @@ export function MediaImage({
 
   return (
     <div className={classNames('media__content image__wrapper', {
-      'shieldMask relative': mask,
+      'shieldMask': mask,
     })} {...props}>
       {mask &&
         <ClipPath/>

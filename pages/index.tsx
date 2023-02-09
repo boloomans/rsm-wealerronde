@@ -53,7 +53,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                           className="bg-secondary-10 text-secondary-900"
                         />
                       ))}
-                      <div className="grid grid-cols-2 gap-2">
+                      <div className="grid grid-cols-2 gap-6">
                         {news.slice(1, 3).map((news) => (
                           <NodeCardSmall
                             key={news.id}
