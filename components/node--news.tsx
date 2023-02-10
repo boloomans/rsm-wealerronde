@@ -5,9 +5,8 @@ import {formatDate} from "../lib/format-date";
 import {FormattedText} from "./formatted-text";
 import BackButton from "./backButton";
 import {BlockBanner} from "./block--banner";
-import  { Button } from '../ThemeConfig';
-import { BiChevronRight } from 'react-icons/bi';
 import classNames from 'classnames';
+import {CardButton} from "./buttons/button";
 
 export function NodeNews({node, ...props}) {
   return (
@@ -89,7 +88,7 @@ export function NodeCardSmall({node, size, ...props}) {
         <div className="flex flex-col lg:h-full lg:flex-row -mt-36 lg:mt-0 lg:pb-0">
           {node.field_news_image && (
                 <div
-                  className="relative w-5/6 self-center max-w-[125px] lg:max-w-[200px] lg:-ml-[100px]">
+                  className="relative w-5/6 max-w-[125px] self-center lg:-ml-[100px] lg:max-w-[200px]">
 
                 <MediaImage
                                 media={node.field_news_image}
@@ -118,14 +117,5 @@ export function NodeCardSmall({node, size, ...props}) {
 }
 
 
-function CardButton({small = false}) {
-  console.log(small)
-  return (
-    <div className={classNames('relative flex justify-end -mb-6 lg:-mt-6 lg:mb-0 lg:mr-4', {'justify-center lg:justify-end': small})}>
-      <Button className='rounded-full bg-secondary-900'>
-        <BiChevronRight className="text-5xl text-white-900"></BiChevronRight>
-      </Button>
-    </div>
-  )
-}
+
 

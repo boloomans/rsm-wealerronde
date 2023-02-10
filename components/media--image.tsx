@@ -6,8 +6,6 @@ import React, { CSSProperties } from "react";
 
 import { ClipPath } from './shieldMask/shieldMask';
 import classNames from 'classnames';
-import { className } from 'postcss-selector-parser';
-
 
 interface MediaImageProps extends Partial<ImageProps> {
   media: DrupalMedia;

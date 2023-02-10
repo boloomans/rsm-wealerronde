@@ -6,35 +6,33 @@ import { DrupalNode } from 'next-drupal';
 import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 import { drupal } from '../lib/drupal';
 import { testApiCompatibility } from 'next-acms';
-import { NodeCardBig, NodeCardSmall } from '../components/node--news';
+import { NodeCard } from '../components/Components/card';
 import { BlockWheel } from '../components/block--wheelNavigation';
 import { ENTITY_TYPES } from './[...slug]';
 
 interface ProgrammaPageProps extends LayoutProps {
-  news: DrupalNode[];
+  events: DrupalNode[];
 }
 
-export default function IndexPage({ menus, news  }: ProgrammaPageProps) {
+export default function programmaPage({ menus, events  }: ProgrammaPageProps) {
   return (
     <Layout title="Informatie" menus={menus}>
       <div className="mt-12 lg:mt-32">
         <section className="container mx-auto px-6">
           <div className="w-full">
             <div className="container mx-auto mt-12 pb-10">
-              <h1>Programma</h1>
-
-              {news?.length ? (
+              {events?.length ? (
                 <div className="grid gap-4 lg:gap-14" data-cy="featured-news">
                   <div className="grid grid-cols-1 gap-2">
-                    {news.slice(0, 1).map((news) => (
-                      <NodeCardSmall
-                        key={news.id}
-                        node={news}
-                        size="small"
+                    {events.slice(0, 1).map((event) => (
+                      <NodeCard
+                        key={event.id}
+                        node={event}
+                        className="bg-primary-10 text-primary-900"
+                        time
                       />
                     ))}
                   </div>
-                  <div>19:00</div>
                 </div>
 
               ) : (
@@ -57,30 +55,33 @@ export async function getStaticProps(
   if (process.env.NODE_ENV == 'development') {
     await testApiCompatibility(ENTITY_TYPES, drupal);
   }
-  const news = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
-    'node--news',
+  const events = await drupal.getResourceCollectionFromContext<DrupalNode[]>(
+    'node--event',
     context,
     {
       params: new DrupalJsonApiParams()
         .addFilter('status', '1')
-        .addSort('field_news_date', 'DESC')
-        .addInclude(['field_news_image.image'])
-        .addFields('node--news', [
+        .addSort('field_event_start', 'ASC')
+        .addFilter('field_event_start', new Date().toISOString(), '>=')
+        .addInclude(['field_event_image.image', 'field_event_place'])
+        .addFields('node--event', [
           'id',
           'title',
           'path',
           'body',
-          'field_news_date',
-          'field_news_image',
+          'field_event_start',
+          'field_event_image',
+          'field_event_place',
+          'field_inline_link',
         ])
-        .addPageLimit(3)
+        .addFields('node--place', ['title', 'path'])
         .getQueryObject(),
     },
   );
   return {
     props: {
       menus: await getMenus(context),
-      news,
+      events,
     },
     revalidate: 60,
   };

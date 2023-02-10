@@ -16,6 +16,7 @@ import { MediaFotobookTeaser } from "../components/media--fotobook";
 import { PageHeader } from '../components/page-header';
 import { NodeSponsorTeaser } from '../components/node--sponsors';
 import { NodePopup } from '../components/node--popup';
+import { NodeCard } from '../components/Components/card';
 
 interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
@@ -55,10 +56,12 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                       ))}
                       <div className="grid grid-cols-2 gap-6">
                         {news.slice(1, 3).map((news) => (
-                          <NodeCardSmall
+                          <NodeCard
                             key={news.id}
                             node={news}
-                            size="small"
+                            className="bg-secondary-10 text-secondary-900"
+                            imageResponsive
+                            button
                           />
                         ))}
                       </div>
