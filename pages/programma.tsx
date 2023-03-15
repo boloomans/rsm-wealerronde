@@ -29,7 +29,8 @@ export default function programmaPage({ menus, events  }: ProgrammaPageProps) {
                         key={event.id}
                         node={event}
                         className="bg-primary-10 text-primary-900"
-                        time
+                        time={true}
+                        linkInside
                       />
                     ))}
                   </div>

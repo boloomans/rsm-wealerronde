@@ -56,11 +56,12 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                       ))}
                       <div className="grid grid-cols-2 gap-6">
                         {news.slice(1, 3).map((news) => (
-                          <NodeCard
+                          <NodeCardSmall
                             key={news.id}
                             node={news}
                             className="bg-secondary-10 text-secondary-900"
                             imageResponsive
+                            size
                             button
                           />
                         ))}
