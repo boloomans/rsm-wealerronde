@@ -17,7 +17,6 @@ import { PageHeader } from '../components/page-header';
 import { NodeSponsorTeaser } from '../components/node--sponsors';
 import { NodePopup } from '../components/node--popup';
 import { NodeCard } from '../components/Components/card';
-import { NodePlaceTeaser } from '../components/node--place';
 
 interface IndexPageProps extends LayoutProps {
   news: DrupalNode[];
@@ -89,16 +88,6 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                     <p>Geen resultaten gevonden.</p>
                   )}
                 </div>
-
-                  <div>
-                      <PageHeader heading="Onze Sponsoren" text="List of latest articles." className="text-blue-900"/>
-                  </div>
-
-                  <div className="container mx-auto mt-12 pb-10">
-                      {places.map((places) => (
-                          <NodePlaceTeaser key={places.id} node={places} />
-                      ))}
-                  </div>
               </TabPanel>
               <TabPanel>
                 <div className="container mx-auto pb-10">
