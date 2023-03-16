@@ -73,7 +73,7 @@ export function NodeSponsorTeaser({sponsors, ...props}: Sponsorsprops) {
 
   if(mQuery && !mQuery.matches){
     return (
-      <section className="mx-auto grid grid-cols-2 auto-rows-max place-items-center h-full w-full gap-4 space-y-4 md:space-y-0" {...props}>
+      <section className="mx-auto grid h-full w-full auto-rows-max grid-cols-2 place-items-center gap-4 space-y-4 md:space-y-0" {...props}>
         {sponsors.map((sponsor) => (
           <SponsorLogo key={sponsor.id} logo={sponsor}/>
         ))}
@@ -81,7 +81,7 @@ export function NodeSponsorTeaser({sponsors, ...props}: Sponsorsprops) {
     )
   } else {
     return (
-      <section className="mx-auto w-full h-full" {...props}>
+      <section className="mx-auto h-full w-full" {...props}>
         <SponsorSwiper sponsors={sponsors}></SponsorSwiper>
       </section>
     )
@@ -122,12 +122,12 @@ function SponsorSwiper({sponsors, ...props}) {
 //Logo Image
 function SponsorLogo({logo, ...props}) {
   return (
-    <div {...props} className="h-full hover:shadow-black-900 hover:drop-shadow-[0_3px_6px_rgba(214,214,214,1)] m-0">
+    <div {...props} className="m-0 h-full hover:shadow-black-900 hover:drop-shadow-[0_3px_6px_rgba(214,214,214,1)]">
       {logo.field_logo && (
         <Link
           className="block h-full overflow-hidden rounded-md bg-white-900 no-underline"
           href={logo.field_website_link.uri} target={'_blank'} passHref>
-          <MediaImage className="p-4 h-full"
+          <MediaImage className="h-full p-4"
                       media={logo.field_logo}
                       imageStyling={{
                         objectFit: "contain",

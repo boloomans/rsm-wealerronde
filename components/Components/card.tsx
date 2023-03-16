@@ -27,7 +27,7 @@ export function NodeCard({
     )
   }
   return (
-    <article className="relative rounded-lg">
+    <article className={classNames('relative rounded-lg mb-6 ', {'mt-24  lg:mt-0 lg:ml-[100px]': props.small}, className)}>
       {itemContent}
     </article>
   );
@@ -37,23 +37,33 @@ function CardBody({
                     ...props
                   }) {
   const node = props.node
+  const link = node.field_inline_link?.uri || node.path.alias
   const image = node.field_event_image || node.field_news_image
   return (
     <>
-      <div className={classNames('flex justify-between flex-col w-full', {'lg:flex-row': props.imageResponsive})}>
+      <div className={classNames('flex flex-col lg:flex-row', {'-mt-24 items-center lg:mt-0 lg:h-full': props.small}, {'w-full justify-between': props.large}, {'skew-y-12': !props.large && !props.small})}>
         {image && (
-          <div className="relative self-center rounded-t-lg object-fill lg:rounded-l-lg lg:rounded-tr-[0]">
-            <MediaImage
-              media={image}
-              priority
-              fill
-              mask={true}
-              imageStyle="coh_small_square"
-
-            />
+          <div className={classNames("relative", {'max-h-[125px] max-w-[100px] self-center lg:ml-[-100px] lg:max-h-[230px] lg:max-w-[180px]': props.small}, {'rounded-t-lg lg:rounded-l-lg lg:rounded-tr-[0]': props.large})}>
+            {props.large && (
+              <MediaImage
+                media={image}
+                priority
+                sizes="(max-width: 1025px) 1000vw, 50vw"
+              />
+            )}
+            {props.small && (
+              <MediaImage
+                media={image}
+                priority
+                fill
+                mask={true}
+                imageStyle="coh_small_square"
+                sizes="(max-width: 1025px) 50vw, 33vw"
+              />
+            )}
           </div>
         )}
-        <div className={classNames("relative px-5 pt-6 pb-11 lg:p-20", props.className)}>
+        <div className={classNames("relative ", {'w-full p-5 pb-10 md:p-6 lg:px-12 lg:pb-0': props.small}, {'px-5 pt-6 pb-11 lg:p-20': props.large}, props.className)}>
           {props.linkInside && (
             <Link href={absoluteURL(node.field_inline_link.uri)} passHref>{node.field_inline_link.title}</Link>
           )}
@@ -71,9 +81,11 @@ function CardBody({
           )}
         </div>
       </div>
-      {props.button && (
-        <CardButton
-        />
+      {props.button && props.large && (
+        <CardButton/>
+      )}
+      {props.button && props.small && (
+        <CardButton small/>
       )}
 
       {props.time && (

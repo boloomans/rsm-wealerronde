@@ -1,12 +1,14 @@
 import Link from 'next/link';
 import {MediaImage} from 'components/media--image';
-import React, { CSSProperties } from 'react';
+import React from 'react';
 import {formatDate} from "../lib/format-date";
 import {FormattedText} from "./formatted-text";
 import BackButton from "./backButton";
 import {BlockBanner} from "./block--banner";
 import classNames from 'classnames';
 import {CardButton} from "./buttons/button";
+import {Button} from "../ThemeConfig";
+import {BiChevronRight} from "react-icons/bi";
 
 export function NodeNews({node, ...props}) {
   return (
@@ -50,60 +52,62 @@ export function NodeCardBig({
                               ...props
     }) {
     return (
-        <article className="rounded-lg" {...props}>
-            <Link href={node.path.alias} passHref>
-              <div className="flex justify-between flex-col lg:flex-row w-full">
-                {node.field_news_image && (
-                  <div className="object-fill rounded-t-lg lg:rounded-l-lg lg:rounded-tr-[0]">
-                    <MediaImage
-                      media={node.field_news_image}
-                      priority
-                      sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
-                    />
-                  </div>
-                )}
-
-                <div className={classNames("relative px-5 pt-6 pb-11 lg:p-20", className)}>
-                  <h2
-                    className="mb-2 font-body text-lg font-bold lg:text-xl">{node.title}</h2>
-                  {node.body?.summary && (
-                    <p
-                      className="font-body text-sm leading-5 text-black-900 line-clamp-3 lg:text-[16px] lg:leading-8 lg:line-clamp-5"
-                      data-cy="summary">
-                      {node.body.summary}
-                    </p>
-                  )}
-                </div>
+      <article className="mb-6 rounded-lg" {...props}>
+        <Link href={node.path.alias} passHref>
+          <div className="flex w-full flex-col justify-between lg:flex-row">
+            {node.field_news_image && (
+              <div className="rounded-t-lg object-fill lg:rounded-l-lg lg:rounded-tr-[0]">
+                <MediaImage
+                  media={node.field_news_image}
+                  priority
+                  sizes="(min-width: 968px) 420px, (min-width: 768px) 50vw, 100vw"
+                />
               </div>
-              <CardButton/>
-      </Link>
-    </article>
+            )}
+            <div className={classNames("relative px-5 pt-6 pb-11 lg:p-20", className)}>
+              <h2
+                className="mb-2 font-body text-lg font-bold lg:text-xl">{node.title}</h2>
+              {node.body?.summary && (
+                <p
+                  className="font-body text-sm leading-5 text-black-900 line-clamp-3 lg:text-[16px] lg:leading-8 lg:line-clamp-5"
+                  data-cy="summary">
+                  {node.body.summary}
+                </p>
+              )}
+            </div>
+          </div>
+          <CardButton/>
+        </Link>
+      </article>
   );
 }
 
 export function NodeCardSmall({node, size, ...props}) {
   return (
-    <article className="relative rounded-lg bg-secondary-10 lg:h-5/6 mt-36 lg:mt-0 lg:ml-[100px]" {...props}>
-      <Link href={node.path.alias} passHref className="flex flex-wrap lg:flex-nowrap justify-between h-full flex-col">
-        <div className="flex flex-col lg:h-full lg:flex-row -mt-36 lg:mt-0 lg:pb-0">
+    // <article className="relative mb-6 mt-24 rounded-lg bg-secondary-10 lg:mt-0 lg:ml-[100px] lg:h-5/6" {...props}>
+    //   <Link href={node.path.alias} passHref className="flex h-full flex-col flex-wrap justify-between lg:flex-nowrap">
+    //     <div className="-mt-24 flex flex-col lg:mt-0 lg:h-full lg:flex-row lg:pb-0">
+    <article className="relative mb-6 mt-24 rounded-lg bg-secondary-10 lg:mt-0 lg:ml-[100px]" {...props}>
+      <Link href={node.path.alias} passHref className="block">
+        <div className="-mt-24 flex flex-col items-center lg:mt-0 lg:h-full lg:flex-row">
           {node.field_news_image && (
-                <div
-                  className="relative w-5/6 max-w-[125px] self-center lg:-ml-[100px] lg:max-w-[200px]">
-
-                <MediaImage
-                                media={node.field_news_image}
-                                priority
-                                fill
-                                mask={true}
-                                imageStyle="coh_small_square"
-                    />
+                <div className="relative max-h-[125px] max-w-[100px] self-center lg:ml-[-100px] lg:max-h-[230px] lg:max-w-[180px]">
+                  <MediaImage
+                                  media={node.field_news_image}
+                                  priority
+                                  fill
+                                  mask={true}
+                                  imageStyle="coh_small_square"
+                                  sizes="(max-width: 1025px) 50vw,
+                                                  33vw"
+                      />
                 </div>
               )}
-              <div className="p-6 lg:px-12 lg:pb-20">
+              <div className="p-6 pb-10 lg:px-12 lg:pb-0">
                 <h2
                   className="mb-3 font-body text-lg font-bold leading-6 text-secondary-900 line-clamp-3 lg:text-xl">{node.title}</h2>
                 {node.body?.summary && (
-                  <p className="font-body text-sm leading-5 text-black-900 line-clamp-3 lg:leading-8 lg:text-[16px]"
+                  <p className="font-body text-sm leading-5 text-black-900 line-clamp-3 lg:text-[16px] lg:leading-8"
                      data-cy="summary">
                     {node.body.summary}
                   </p>
@@ -115,7 +119,4 @@ export function NodeCardSmall({node, size, ...props}) {
     </article>
   );
 }
-
-
-
 

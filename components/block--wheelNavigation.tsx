@@ -11,8 +11,8 @@ interface BlockWheelNavigationProps {
 export function BlockWheel({ ...props }) {
   return (
     <div >
-      <div className="absolute bottom-0 left-1/2 -translate-x-1/2 -z-10">
-        <div className="border-2 border-primary-900 rounded-full h-[335px] w-[335px]">
+      <div className="absolute bottom-0 left-1/2 -z-10 -translate-x-1/2">
+        <div className="h-[335px] w-[335px] rounded-full border-2 border-primary-900">
           <Image priority src="/fietswiel.png" alt="Fietswiel" layout="fill" />
         </div>
       </div>

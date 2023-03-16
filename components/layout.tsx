@@ -31,6 +31,7 @@ export function Layout({ title, header = true, menus, banners, children }: Layou
       <PreviewAlert />
       <div className="relative flex min-h-screen flex-col">
         {header &&
+          // eslint-disable-next-line tailwindcss/no-custom-classname
           <header className={`navbar sticky-custom z-50 w-full`}>
             <div className="container mx-auto flex flex-row items-center justify-between px-6 py-4">
               <Link className="flex items-center space-x-2 no-underline" href="/" passHref>
@@ -46,7 +47,7 @@ export function Layout({ title, header = true, menus, banners, children }: Layou
         <main className="flex-1">
           {children}
         </main>
-        <footer className="container mx-auto px-6">
+        <footer className="container mx-auto px-4 lg:px-6">
           <div className="border-t pt-8 pb-12 md:pt-12">
             {menus?.footer && <MenuFooter menu={menus.footer} />}
           </div>

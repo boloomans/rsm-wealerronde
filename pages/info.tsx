@@ -41,7 +41,7 @@ export default function IndexPage({ menus, news, persons }: InfoPageProps) {
 
 
             {persons?.length ? (
-              <div className="grid grid-cols-2 pb-6 gap-4 lg:gap-14" data-cy="featured-persons">
+              <div className="grid grid-cols-2 gap-4 pb-6 lg:gap-14" data-cy="featured-persons">
                 {persons.slice(0, 4).map((person) => (
                   <NodePerson
                     key={person.id}

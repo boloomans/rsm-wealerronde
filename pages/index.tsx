@@ -54,14 +54,31 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                           className="bg-secondary-10 text-secondary-900"
                         />
                       ))}
-                      <div className="grid grid-cols-2 gap-6">
+                      {news.slice(0, 1).map((news) => (
+                        <NodeCard
+                          key={news.id}
+                          node={news}
+                          className="bg-secondary-10 text-secondary-900"
+                          large
+                          button
+                        />
+                      ))}
+                      <div className="grid grid-cols-2 gap-2 lg:gap-6">
                         {news.slice(1, 3).map((news) => (
                           <NodeCardSmall
                             key={news.id}
                             node={news}
-                            className="bg-secondary-10 text-secondary-900"
-                            imageResponsive
+                            // className="bg-secondary-10 text-secondary-900"
                             size
+                            button
+                          />
+                        ))}
+                        {news.slice(1, 3).map((news) => (
+                          <NodeCard
+                            key={news.id}
+                            node={news}
+                            className="bg-secondary-10 text-secondary-900"
+                            small
                             button
                           />
                         ))}

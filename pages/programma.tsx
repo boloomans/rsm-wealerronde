@@ -15,6 +15,7 @@ interface ProgrammaPageProps extends LayoutProps {
 }
 
 export default function programmaPage({ menus, events  }: ProgrammaPageProps) {
+  console.log(events);
   return (
     <Layout title="Informatie" menus={menus}>
       <div className="mt-12 lg:mt-32">
@@ -30,7 +31,7 @@ export default function programmaPage({ menus, events  }: ProgrammaPageProps) {
                         node={event}
                         className="bg-primary-10 text-primary-900"
                         time={true}
-                        linkInside
+                        // linkInside
                       />
                     ))}
                   </div>
