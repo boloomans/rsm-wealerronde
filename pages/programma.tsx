@@ -27,11 +27,12 @@ export default function programmaPage({ menus, events  }: ProgrammaPageProps) {
                   <div className="grid grid-cols-1 gap-2">
                     {events.slice(0, 1).map((event) => (
                       <NodeCard
+                        small
                         key={event.id}
                         node={event}
                         className="bg-primary-10 text-primary-900"
                         time={true}
-                        // linkInside
+                        linkInside
                       />
                     ))}
                   </div>

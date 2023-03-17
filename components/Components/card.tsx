@@ -41,17 +41,16 @@ function CardBody({
   const image = node.field_event_image || node.field_news_image
   return (
     <>
-      <div className={classNames('flex flex-col lg:flex-row', {'-mt-24 items-center lg:mt-0 lg:h-full': props.small}, {'w-full justify-between': props.large}, {'skew-y-12': !props.large && !props.small})}>
+      <div className={classNames('flex flex-col lg:flex-row',{'-mt-24 items-center lg:mt-0 lg:h-full': props.small}, {'w-full justify-between': props.large})}>
         {image && (
           <div className={classNames("relative", {'max-h-[125px] max-w-[100px] self-center lg:ml-[-100px] lg:max-h-[230px] lg:max-w-[180px]': props.small}, {'rounded-t-lg lg:rounded-l-lg lg:rounded-tr-[0]': props.large})}>
-            {props.large && (
+            {props.large ? (
               <MediaImage
                 media={image}
                 priority
                 sizes="(max-width: 1025px) 1000vw, 50vw"
               />
-            )}
-            {props.small && (
+            ) : (
               <MediaImage
                 media={image}
                 priority
@@ -61,6 +60,17 @@ function CardBody({
                 sizes="(max-width: 1025px) 50vw, 33vw"
               />
             )}
+
+            {/*{props.small && (*/}
+            {/*  <MediaImage*/}
+            {/*    media={image}*/}
+            {/*    priority*/}
+            {/*    fill*/}
+            {/*    mask={true}*/}
+            {/*    imageStyle="coh_small_square"*/}
+            {/*    sizes="(max-width: 1025px) 50vw, 33vw"*/}
+            {/*  />*/}
+            {/*)}*/}
           </div>
         )}
         <div className={classNames("relative ", {'w-full p-5 pb-10 md:p-6 lg:px-12 lg:pb-0': props.small}, {'px-5 pt-6 pb-11 lg:p-20': props.large}, props.className)}>
