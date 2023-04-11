@@ -13,7 +13,7 @@ export function shieldMask({ node, ...props }) {
             style={{
                 clipPath: "url(#image-mask)"
             }}
-            className={"shield-mask " + className}
+            className={"shield-mask relative" + className}
 
             {...props}
         >

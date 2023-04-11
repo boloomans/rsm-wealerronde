@@ -73,7 +73,7 @@ function CardBody({
             {/*)}*/}
           </div>
         )}
-        <div className={classNames("relative ", {'w-full p-5 pb-10 md:p-6 lg:px-12 lg:pb-0': props.small}, {'px-5 pt-6 pb-11 lg:p-20': props.large}, props.className)}>
+        <div className={classNames("relative ", {'w-full p-5 pb-10 md:p-6 lg:px-12 lg:pb-0': props.small}, {'rounded px-5 pt-6 pb-11 lg:p-20': props.large}, props.className)}>
           {props.linkInside && (
             <Link href={absoluteURL(node.field_inline_link.uri)} passHref>{node.field_inline_link.title}</Link>
           )}

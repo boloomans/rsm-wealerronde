@@ -9,7 +9,7 @@
 .shieldMask {
     clip-path: url(#mask);
     max-height: 100%;
-    position: relative;
+    /*position: relative;*/
 }
 .shieldMask svg{
     max-height: 100%;
@@ -18,8 +18,10 @@
     --iv-bold: 700;
     --iv-pt-sans-font: 'PT Sans', 'sans-serif';
     --iv-white: #FFF;
-    --iv-primary: #D6B46A;
+    --iv-primary: #ED1C24;
+    --iv-primary-10: #FDE8E9;
     --iv-secondary: #D6B46A;
+    --iv-tertiary: #D6B46A;
 }
 
 .sticky-custom {
@@ -144,4 +146,29 @@
 
 .custom-marker{
 
+}
+
+/* Google maps */
+/* InfoWindow*/
+.gm-style .gm-style-iw-c{
+    padding: 0;
+    overflow: visible;
+}
+.gm-style .gm-style-iw-tc::after{
+    background-color: rgb(205 237 249);
+}
+
+.gm-style .gm-style-iw-d{
+    overflow: visible !important;
+}
+/* InfoWindow*/
+/* Google maps */
+
+/*Loading bar*/
+#nprogress .bar {
+    background: var(--iv-primary) !important;
+}
+
+#nprogress .peg {
+    box-shadow: 0 0 10px var(--iv-primary), 0 0 5px var(--iv-primary) !important;
 }

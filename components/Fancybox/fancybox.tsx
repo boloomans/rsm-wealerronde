@@ -1,22 +1,24 @@
-import React, { useEffect } from "react";
+import React, {useEffect, useRef} from "react";
 
 import { Fancybox as NativeFancybox } from "@fancyapps/ui/dist/fancybox.umd.js";
 import "@fancyapps/ui/dist/fancybox.css";
 
 function Fancybox(props) {
-  const delegate = props.delegate || "[data-fancybox]";
+  const container = useRef(null);
 
   useEffect(() => {
-    const opts = props.options || {};
+    const delegate = props.delegate || "[data-fancybox]";
+    const options = props.options || {};
 
-    NativeFancybox.bind(delegate, opts);
+    NativeFancybox.bind(container.current, delegate, options);
 
     return () => {
-      NativeFancybox.destroy();
+      NativeFancybox.unbind(container.current);
+      NativeFancybox.close();
     };
-  }, [delegate, props.options]);
+  });
 
-  return <>{props.children}</>;
+  return <div ref={container}>{props.children}</div>;
 }
 
 export default Fancybox;

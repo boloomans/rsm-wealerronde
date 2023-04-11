@@ -5,7 +5,6 @@ import { DrupalJsonApiParams } from 'drupal-jsonapi-params';
 import { getMenus } from 'lib/get-menus';
 import { Layout, LayoutProps } from 'components/layout';
 import { PageHeader } from 'components/page-header';
-import { NodePersonTeaser } from 'components/node--person';
 import { drupal } from '../lib/drupal';
 
 interface PeoplePageProps extends LayoutProps {
@@ -19,9 +18,9 @@ export default function PeoplePage({ menus, people }: PeoplePageProps) {
       <div className="container mx-auto px-6 pb-10">
         {people?.length ? (
           <div className="grid gap-20 md:grid-cols-3">
-            {people.map((person) => (
-              <NodePersonTeaser key={person.id} node={person} />
-            ))}
+          {/*//   {people.map((person) => (*/}
+          {/*//     <NodePersonTeaser key={person.id} node={person} />*/}
+          {/*//   ))}*/}
           </div>
         ) : (
           <p>No content found.</p>

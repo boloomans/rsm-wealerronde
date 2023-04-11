@@ -10,6 +10,7 @@ import React, {useEffect, useRef, useState} from "react";
 import {FaBell} from "react-icons/fa";
 import {BlockHero} from "./block--hero";
 import {bool} from "yup";
+import {NotificationBell} from "./Components/notification";
 
 export interface LayoutProps {
   title?: string;
@@ -39,7 +40,8 @@ export function Layout({ title, header = true, menus, banners, children }: Layou
                   <Image src="/logo.png" alt="Logo" width={83} height={33}/>
                 </div>
               </Link>
-              <FaBell className="text-2xl text-primary-900"></FaBell>
+              {/*<FaBell className="text-2xl text-primary-900"></FaBell>*/}
+              <NotificationBell></NotificationBell>
               {menus?.main && <MenuMain menu={menus.main}/>}
             </div>
           </header>

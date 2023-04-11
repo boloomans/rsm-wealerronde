@@ -48,13 +48,6 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                   {news?.length ? (
                     <div className="grid gap-4 lg:gap-14" data-cy="featured-news">
                       {news.slice(0, 1).map((news) => (
-                        <NodeCardBig
-                          key={news.id}
-                          node={news}
-                          className="bg-secondary-10 text-secondary-900"
-                        />
-                      ))}
-                      {news.slice(0, 1).map((news) => (
                         <NodeCard
                           key={news.id}
                           node={news}
@@ -64,15 +57,6 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                         />
                       ))}
                       <div className="grid grid-cols-2 gap-2 lg:gap-6">
-                        {news.slice(1, 3).map((news) => (
-                          <NodeCardSmall
-                            key={news.id}
-                            node={news}
-                            // className="bg-secondary-10 text-secondary-900"
-                            size
-                            button
-                          />
-                        ))}
                         {news.slice(1, 3).map((news) => (
                           <NodeCard
                             key={news.id}
@@ -107,7 +91,7 @@ export default function IndexPage({ menus, news, events, banners, fotoBooks, pla
                 </div>
               </TabPanel>
               <TabPanel>
-                <div className="container mx-auto pb-10">
+                <div className="container mx-auto min-h-[400px] pb-10">
                   {fotoBooks?.length ? (
                     <div className="mt-12 grid grid-cols-2 gap-2" data-cy="featured-fotoBooks">
                       {fotoBooks.slice(0, 3).map((fotoBook) => (

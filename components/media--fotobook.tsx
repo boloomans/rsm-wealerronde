@@ -22,7 +22,7 @@ export function MediaFotobook({media, ...props}) {
             columnClassName="my-masonry-grid_column">
             {media.field_media_image.map((image) => (
               // eslint-disable-next-line tailwindcss/no-custom-classname
-              <div key={image.id}>
+              <div key={image.id} className='hover:cursor-pointer'>
                 <Image src={image.links.original.href}
                        alt={media.field_media_image[0].filename}
                        style={{

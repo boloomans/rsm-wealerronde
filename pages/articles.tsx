@@ -19,9 +19,9 @@ export default function ArticlePage({ menus, articles }: ArticlesPageProps) {
       <div className="container mx-auto px-6 pb-10">
         {articles?.length ? (
           <div className="grid grid-cols-2 gap-x-2 gap-y-12 md:gap-x-4">
-            {articles.map((article) => (
-              <NodeCardSmall key={article.id} node={article} />
-            ))}
+            {/*{articles.map((article) => (*/}
+            {/*  <NodeCardSmall key={article.id} node={article} />*/}
+            {/*))}*/}
           </div>
         ) : (
           <p>No content found.</p>
